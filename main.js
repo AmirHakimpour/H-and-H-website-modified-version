@@ -44,7 +44,100 @@ document.addEventListener('DOMContentLoaded', () => {
       card.classList.remove('expanded');
     });
   });
+
+  // Chart.js implementation
+  const revenueCtx = document.getElementById('revenueChart');
+  if (revenueCtx) {
+    new Chart(revenueCtx, {
+      type: 'line',
+      data: {
+        labels: ['Q1', 'Q2', 'Q3', 'Q4', 'Q1 Next Year'],
+        datasets: [{
+          label: 'Revenue Growth with AI',
+          data: [120, 190, 300, 500, 800],
+          borderColor: '#ff4757',
+          backgroundColor: 'rgba(255, 71, 87, 0.2)',
+          fill: true,
+          tension: 0.4
+        }]
+      },
+      options: {
+        responsive: true,
+        scales: {
+          y: {
+            beginAtZero: true,
+            ticks: {
+              color: '#ffffff'
+            }
+          },
+          x: {
+            ticks: {
+              color: '#ffffff'
+            }
+          }
+        },
+        plugins: {
+          legend: {
+            labels: {
+              color: '#ffffff'
+            }
+          }
+        }
+      }
+    });
+  }
+
+  const efficiencyCtx = document.getElementById('efficiencyChart');
+  if (efficiencyCtx) {
+    new Chart(efficiencyCtx, {
+      type: 'bar',
+      data: {
+        labels: ['Marketing', 'Sales', 'Support', 'Operations'],
+        datasets: [{
+          label: 'Efficiency Gain',
+          data: [65, 59, 80, 81],
+          backgroundColor: [
+            'rgba(255, 71, 87, 0.5)',
+            'rgba(255, 107, 117, 0.5)',
+            'rgba(255, 147, 157, 0.5)',
+            'rgba(255, 187, 197, 0.5)'
+          ],
+          borderColor: [
+            '#ff4757',
+            '#ff6b75',
+            '#ff939d',
+            '#ffbbc1'
+          ],
+          borderWidth: 1
+        }]
+      },
+      options: {
+        responsive: true,
+        scales: {
+          y: {
+            beginAtZero: true,
+            ticks: {
+              color: '#ffffff'
+            }
+          },
+          x: {
+            ticks: {
+              color: '#ffffff'
+            }
+          }
+        },
+        plugins: {
+          legend: {
+            labels: {
+              color: '#ffffff'
+            }
+          }
+        }
+      }
+    });
+  }
 });
+
 
 //booking form
 (function () {
@@ -89,9 +182,9 @@ document
           SERVICE_ID,
           AUTO_REPLY_TEMPLATE,
           {
-            name,        
-            title,        
-            reply_to,    
+            name,
+            title,
+            reply_to,
           },
           USER_ID
         );
@@ -128,6 +221,19 @@ document.addEventListener('keyup', e => {
   }
 });
 
+// Scroll animations
+const animatedElements = document.querySelectorAll('.animated');
 
+const observer = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+        if (entry.isIntersecting) {
+            entry.target.classList.add('is-visible');
+        }
+    });
+}, {
+    threshold: 0.1
+});
 
-
+animatedElements.forEach(element => {
+    observer.observe(element);
+});
