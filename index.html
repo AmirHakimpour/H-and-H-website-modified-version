@@ -39,13 +39,12 @@
   <!-- title favicon logo -->
   <link rel="icon" type="image/png" sizes="32x32" href="assets/HandH_logored.png">
   <!-- Google Fonts -->
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Exo+2:wght@400;500;700&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&display=swap" rel="stylesheet">
   <!-- Font Awesome (for icons) -->
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" />
   <!-- Your CSS -->
   <link rel="stylesheet" href="style.css">
+  <link rel="stylesheet" href="dark-mode.css">
   <!-- Chart.js SDK -->
   <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
   <!-- EmailJS SDK -->
@@ -75,6 +74,7 @@
           <li><a href="#Home">Home</a></li>
           <li><a href="#why-choose">About Us</a></li>
           <li><a href="#services">Services</a></li>
+          <li><a href="#graphs">Graphs</a></li>
           <li><a href="#contact">Contact Us</a></li>
         </ul>
       </nav>
@@ -134,7 +134,7 @@
 
       <div class="feature-grid">
         <!-- Card 1 -->
-        <article class="feature-card card--ai animated">
+        <article class="feature-card card--ai">
           <div class="feature-card__image">
             <img src="assets/bg-ai-personal-red.png" alt="Abstract AI network">
           </div>
@@ -156,7 +156,7 @@
         </article>
 
         <!-- Card 2 -->
-        <article class="feature-card card--roi animated">
+        <article class="feature-card card--roi">
           <div class="feature-card__image">
             <img src="assets/bg-roi-minimal.png" alt="Bar chart growth">
           </div>
@@ -178,7 +178,7 @@
         </article>
 
         <!-- Card 3 -->
-        <article class="feature-card card--tailored animated">
+        <article class="feature-card card--tailored">
           <div class="feature-card__image">
             <img src="assets/bg-tailored-minimal.png" alt="Custom strategy diagram">
           </div>
@@ -200,7 +200,7 @@
         </article>
 
         <!-- Card 4 -->
-        <article class="feature-card card--collab animated">
+        <article class="feature-card card--collab">
           <div class="feature-card__image">
             <img src="assets/bg-collab-minimal.png" alt="Collaborative partnership">
           </div>
@@ -231,7 +231,7 @@
       <p class="section-intro">How we help your business grow</p>
       <div class="services-grid">
         <!-- Strategic Business Planning -->
-        <article class="service-card animated">
+        <article class="service-card">
           <i class="fas fa-chart-pie"></i>
           <h3>Strategic Business Planning</h3>
           <ul>
@@ -247,7 +247,7 @@
         </article>
 
         <!-- Startup & Founder Advisory -->
-        <article class="service-card animated">
+        <article class="service-card">
           <i class="fas fa-rocket"></i>
           <h3>Startup &amp; Founder Advisory</h3>
           <ul>
@@ -262,7 +262,7 @@
         </article>
 
         <!-- SME Growth Consulting -->
-        <article class="service-card animated">
+        <article class="service-card">
           <i class="fas fa-chart-line"></i>
           <h3>SME Growth Consulting</h3>
           <ul>
@@ -277,7 +277,7 @@
         </article>
 
         <!-- AI & Digital Transformation -->
-        <article class="service-card animated">
+        <article class="service-card">
           <i class="fas fa-robot"></i>
           <h3>AI for Business Innovation</h3>
           <ul>
@@ -292,7 +292,7 @@
         </article>
 
         <!-- AI-Enhanced Forecasting & Decision-Making -->
-        <article class="service-card animated">
+        <article class="service-card">
           <i class="fas fa-chart-area"></i>
           <h3>AI-Enhanced Forecasting &amp; Decision-Making</h3>
           <ul>
@@ -306,7 +306,7 @@
         </article>
 
         <!-- AI in Marketing & CX -->
-        <article class="service-card animated">
+        <article class="service-card">
           <i class="fas fa-bullhorn"></i>
           <h3>AI in Marketing &amp; CX</h3>
           <ul>
@@ -320,7 +320,7 @@
         </article>
 
         <!-- Workshops & Executive Training -->
-        <article class="service-card animated">
+        <article class="service-card">
           <i class="fas fa-chalkboard-teacher"></i>
           <h3>Workshops &amp; Executive Training</h3>
           <ul>
@@ -338,7 +338,7 @@
   </section>
 
   <!-- GRAPHS SECTION -->
-  <section id="graphs" class="section">
+  <section id="graphs" class="services-section">
       <div class="container">
           <h2 class="section-title">Business Growth with AI</h2>
           <p class="section-intro">
@@ -347,11 +347,11 @@
           <div class="charts-grid">
               <div class="chart-container animated">
                   <h3>AI-Driven Revenue Growth</h3>
-                  <canvas id="revenueChart"></canvas>
+                  <canvas id="revenueChart" aria-label="Line chart showing AI-driven revenue growth"></canvas>
               </div>
               <div class="chart-container animated">
                   <h3>Operational Efficiency Gains</h3>
-                  <canvas id="efficiencyChart"></canvas>
+                  <canvas id="efficiencyChart" aria-label="Bar chart showing operational efficiency gains"></canvas>
               </div>
           </div>
       </div>
@@ -526,8 +526,9 @@
         <ul>
           <li><a href="#Home">Home</a></li>
           <li><a href="#services">Services</a></li>
+          <li><a href="#graphs">Graphs</a></li>
           <li><a href="#contact">Contact Us</a></li>
-          <li><a href="#about">About Us</a></li>
+          <li><a href="#why-choose">About Us</a></li>
         </ul>
       </div>
 

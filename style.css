@@ -7,13 +7,13 @@ html {
 
 /* 1) Base & Variables */
 :root {
-  --color-primary: #ff4757;
-  --color-secondary: #212121;
-  --color-text: #ffffff;
-  --color-bg: #1a1a1a;
-  --color-accent: #ff4757;
+  --color-primary: #D32F2F;
+  --color-secondary: #263238;
+  --color-text: #424242;
+  --color-bg: #F5F5F5;
+  --color-accent: #FFC107;
   --color-correct: #5cda8a;
-  --font-base: 'Exo 2', sans-serif;
+  --font-base: 'Roboto', sans-serif;
   --color-add: #832929;
 }
 
@@ -26,13 +26,11 @@ html {
 body {
   font-family: var(--font-base);
   color: var(--color-text);
-  background-color: var(--color-bg);
-  background-image: radial-gradient(var(--color-secondary) 1px, transparent 1px);
-  background-size: 20px 20px;
+  background: var(--color-bg);
   line-height: 1.6;
 }
 
-/* --- Navbar (Transparent → Dark on Scroll) --- */
+/* --- Navbar (Transparent → White on Scroll) --- */
 .site-header {
   position: fixed;
   top: 0;
@@ -45,7 +43,7 @@ body {
 
 /* when scrolled */
 .site-header.scrolled {
-  background: var(--color-secondary);
+  background: #fff;
   box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
 }
 
@@ -77,7 +75,7 @@ body {
   /* scales between 0.9rem and 1.25rem */
   font-size: clamp(0.9rem, 2vw, 1.25rem);
   font-weight: 700;
-  color: #fff;
+  color: var(--color-primary);
 }
 
 /* Desktop links */
@@ -91,21 +89,29 @@ body {
   font-family: var(--font-base);
   font-weight: 500;
   text-decoration: none;
-  transition: opacity 0.2s, color 0.2s;
+  transition: opacity 0.2s;
+  /* start white so it’s visible over hero */
   color: #fff;
 }
 
 .nav-list a:hover {
-  color: var(--color-primary);
+  opacity: 0.7;
+  color: #fe6a6a;
 }
 
-/* Scrolled state nav links should remain white */
+/* toggle colors once scrolled */
 .site-header.scrolled .nav-list a {
-  color: #fff;
+  color: var(--color-text);
 }
 
+/* make hover on scrolled header links go red again */
 .site-header.scrolled .nav-list a:hover {
-  color: var(--color-primary);
+  color: #fe6a6a;
+  /* or use var(--color-primary) if you prefer */
+  opacity: 0.7;
+  /* match your existing hover opacity */
+  transition: color 0.2s;
+  /* if you want a smooth fade */
 }
 
 /* Hamburger (mobile) */
@@ -125,6 +131,7 @@ body {
   height: 3px;
   border-radius: 2px;
   transition: transform 0.3s, background 0.3s;
+  /* white initially */
   background: #fff;
 }
 
@@ -136,13 +143,12 @@ body {
   transform: translateY(4px);
 }
 
-/* Hamburger on scroll remains white */
+/* make hamburger dark on scroll */
 .site-header.scrolled .hamburger,
 .site-header.scrolled .hamburger::before,
 .site-header.scrolled .hamburger::after {
-  background: #fff;
+  background: var(--color-text);
 }
-
 
 /* When nav is open, rotate hamburger into an “X” */
 .nav-toggle.open .hamburger {
@@ -168,7 +174,7 @@ body {
     position: absolute;
     top: 100%;
     right: 1rem;
-    background: var(--color-secondary);
+    background: #fff;
     flex-direction: column;
     padding: 1rem;
     box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
@@ -185,12 +191,21 @@ body {
     transform: translateY(0);
   }
 
+}
+
+@media (max-width: 768px) {
+
+  /* ensure dropdown links are dark on white background */
   .nav-list a {
     color: var(--color-text);
   }
+
+  .nav-list a:hover {
+    opacity: 0.7;
+  }
 }
 
-/* Logo swapping */
+/* 1) Logo swapping */
 .logo-img {
   height: 40px;
   width: auto;
@@ -211,46 +226,55 @@ body {
   display: block;
 }
 
-/* Logo text color swap */
+/* 2) Logo‐text color swap */
+
+/* default: white text over the hero */
+.logo-text {
+  margin-left: 0.5rem;
+  font-family: var(--font-base);
+  font-size: clamp(0.9rem, 2vw, 1.25rem);
+  font-weight: 700;
+  color: #fff;
+  transition: color 0.3s ease;
+}
+
+/* after scroll: red text */
 .site-header.scrolled .logo-text {
   color: var(--color-primary);
 }
 
 
-/* Hero Banner */
+/* 2) Hero Banner */
 .hero {
   position: relative;
   background: url('assets/image.png') center/cover no-repeat;
-  height: 100vh;
+  height: 90vh;
   display: flex;
   align-items: center;
-  text-align: center;
 }
 
 .hero .overlay {
   position: absolute;
   inset: 0;
-  background: linear-gradient(to top, rgba(0,0,0,0.8), rgba(0,0,0,0.4));
+  background: rgba(0, 0, 0, 0.5);
 }
 
 .hero-content {
   position: relative;
+  text-align: center;
   color: #fff;
   width: 100%;
   padding: 0 1rem;
 }
 
 .hero-content h1 {
-  font-size: 3.5rem;
+  font-size: 2.5rem;
   margin-bottom: 0.5rem;
-  font-weight: 700;
-  text-shadow: 0 0 15px rgba(255, 71, 87, 0.5);
 }
 
 .hero-content p {
-  font-size: 1.25rem;
-  margin-bottom: 2rem;
-  opacity: 0.9;
+  font-size: 1.125rem;
+  margin-bottom: 1rem;
 }
 
 .btn {
@@ -259,28 +283,23 @@ body {
   border-radius: 0.25rem;
   text-decoration: none;
   font-weight: 500;
-  transition: transform 0.3s ease, background-color 0.3s ease;
 }
 
 .btn-primary {
   background: var(--color-primary);
   color: #fff;
-  border: 1px solid var(--color-primary);
+  transition: opacity 0.2s;
 }
 
 .btn-primary:hover {
-  background: transparent;
-  border: 1px solid var(--color-primary);
-  transform: translateY(-3px);
+  opacity: 0.8;
 }
 
-/* Info Strip */
+/* 3) Info Strip */
 .info-strip {
-  background: var(--color-secondary);
-  color: #fff;
-  padding: 1rem 0;
-  border-top: 1px solid var(--color-primary);
-  border-bottom: 1px solid var(--color-primary);
+  background: var(--color-add);
+  color: #ffff;
+  padding: 0.75rem 0;
 }
 
 .info-items {
@@ -288,88 +307,106 @@ body {
   flex-wrap: wrap;
   justify-content: space-around;
   gap: 1rem;
-  max-width: 1200px;
-  margin: 0 auto;
 }
 
 .info-item {
   display: flex;
+  flex-direction: column;
   align-items: center;
+  text-align: center;
   gap: 0.5rem;
 }
 
+.info-item small {
+  display: block;
+  font-size: 0.75rem;
+  opacity: 0.9;
+}
+
+.info-item strong {
+  font-size: 1rem;
+}
+
 .info-item i {
-  color: var(--color-primary);
+  margin-right: 0.2rem;
+  margin-bottom: 0.5rem;
 }
 
-/* Section Styling */
-.section {
-  padding: 4rem 1rem;
-  background: transparent;
+/* Why Choose Us Section */
+.why-choose-section {
+  padding: 1rem 1rem;
+  background: var(--color-bg);
 }
 
-.section-title {
+.why-choose-section__title {
   text-align: center;
-  font-size: 2.5rem;
-  color: var(--color-primary);
-  margin-bottom: 1rem;
-  text-transform: uppercase;
-  letter-spacing: 2px;
+  font-size: 2rem;
+  color: var(--color-secondary);
+  margin-bottom: 0.5rem;
 }
 
-.section-intro {
+.why-choose-section__intro {
   text-align: center;
   max-width: 600px;
-  margin: 0 auto 3rem;
+  margin: 0 auto 2rem;
   color: var(--color-text);
   opacity: 0.8;
 }
 
-/* Feature Cards Grid */
+/* ---- feature-cards grid ---- */
 .feature-grid {
   display: grid;
   gap: 2rem;
   grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  margin-top: 2rem;
 }
 
+/* ---- base card ---- */
 .feature-card {
   position: relative;
   overflow: hidden;
   border-radius: 0.5rem;
-  background-color: var(--color-secondary);
-  border: 1px solid var(--color-primary);
-  box-shadow: 0 0 20px rgba(255, 71, 87, 0.2);
-  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+  background: #fff;
+  transition: transform 0.2s;
 }
 
 .feature-card:hover {
-  transform: translateY(-8px);
-  box-shadow: 0 0 30px rgba(255, 71, 87, 0.4);
+  transform: translateY(-4px);
 }
 
+/* ---- blurred background image ---- */
 .feature-card__image img {
   display: block;
   width: 100%;
   height: 180px;
+  /* adjust as you like */
   object-fit: cover;
+  filter: blur(0px) brightness(0.9);
+  transform: scale(1.05);
 }
 
+/* ---- main body ---- */
 .feature-card__body {
-  padding: 1.5rem;
+  padding: 1rem;
   text-align: center;
 }
 
 .feature-card__body h3 {
   font-size: 1.25rem;
   margin-bottom: 0.5rem;
-  color: var(--color-text);
+  color: var(--color-secondary);
+  margin-left: auto;
+  margin-right: auto;
+
 }
 
 .feature-card__body p {
   font-size: 0.9rem;
   margin-bottom: 1rem;
+  margin-left: auto;
+  margin-right: auto;
   color: var(--color-text);
-  opacity: 0.7;
 }
 
 .feature-card__readmore {
@@ -379,15 +416,26 @@ body {
   padding: 0.5rem 1rem;
   border-radius: 0.25rem;
   cursor: pointer;
+  font-size: 0.9rem;
+  display: inline-block;
+  margin: 0 auto;
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
 }
 
+.feature-card__readmore:hover {
+  transform: translateY(-3px) scale(1.05);
+  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.25);
+  filter: brightness(1.1);
+}
+
+/* ---- sliding overlay ---- */
 .feature-card__overlay {
   position: absolute;
   bottom: 0;
   left: 0;
   width: 100%;
   height: 100%;
-  background: rgba(0, 0, 0, 0.9);
+  background: rgba(0, 0, 0, 0.8);
   color: #fff;
   transform: translateY(100%);
   transition: transform 0.3s ease;
@@ -395,27 +443,57 @@ body {
   align-items: center;
   justify-content: center;
   padding: 1rem;
+  box-sizing: border-box;
 }
 
 .feature-card.expanded .feature-card__overlay {
   transform: translateY(0);
 }
 
+/* ---- overlay content ---- */
+.feature-card__details {
+  max-width: 260px;
+  text-align: center;
+}
+
 .feature-card__details p {
   font-size: 0.9rem;
   margin-bottom: 1rem;
+  line-height: 1.4;
 }
 
 .feature-card__close {
   background: transparent;
-  border: 1px solid var(--color-primary);
-  color: var(--color-primary);
+  border: 1px solid #fff;
+  color: #fff;
   padding: 0.4rem 0.8rem;
   border-radius: 0.25rem;
   cursor: pointer;
+  font-size: 0.85rem;
 }
 
-/* Services Section */
+/* sercices */
+
+.services-section {
+  padding: 1rem 1rem;
+  background: var(--color-bg);
+}
+
+.section-title {
+  text-align: center;
+  font-size: 2rem;
+  color: var(--color-secondary);
+  margin-bottom: 0.5rem;
+}
+
+.section-intro {
+  text-align: center;
+  max-width: 600px;
+  margin: 0 auto 2rem;
+  color: var(--color-text);
+  opacity: 0.8;
+}
+
 .services-grid {
   display: grid;
   gap: 2rem;
@@ -426,22 +504,24 @@ body {
   display: flex;
   flex-direction: column;
   height: 100%;
-  background-color: var(--color-secondary);
+  align-items: flex-start;
+  text-align: left;
+  background: #fff;
   border-radius: 0.5rem;
   padding: 1.5rem;
-  border: 1px solid var(--color-primary);
-  box-shadow: 0 0 15px rgba(255, 71, 87, 0.15);
-  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+  transition: transform 0.2s;
 }
 
 .service-card:hover {
-  transform: translateY(-8px);
-  box-shadow: 0 0 25px rgba(255, 71, 87, 0.3);
+  transform: translateY(-4px);
 }
 
 .service-card i {
+  display: block;
   font-size: 2rem;
   color: var(--color-primary);
+  /* margin-bottom: 1rem; */
   margin: 0 auto 1rem;
 }
 
@@ -450,114 +530,327 @@ body {
   width: 100%;
   font-size: 1.25rem;
   margin-bottom: 0.75rem;
-  color: var(--color-text);
+  color: var(--color-secondary);
 }
 
 .service-card ul {
-  list-style-type: none;
-  padding: 0;
-  margin: 1rem 0;
+  list-style-type: disc;
+  list-style-position: outside;
+  padding-inline-start: 1.5rem;
+  line-height: 1.4;
+  margin: 1rem;
+  padding: 0.5rem;
+  color: var(--color-text);
+  opacity: 0.85;
   width: 100%;
 }
 
 .service-card li {
   margin-bottom: 0.5rem;
   font-size: 0.9rem;
-  opacity: 0.8;
-  padding-left: 1.5rem;
-  position: relative;
-}
-
-.service-card li::before {
-  content: '▶';
-  color: var(--color-primary);
-  position: absolute;
-  left: 0;
 }
 
 .service-cta {
+  position: relative;
+  align-items: center;
+  display: inline-block;
+  font-weight: 500;
   color: var(--color-primary);
   text-decoration: none;
   margin-top: auto;
   align-self: center;
-  transition: color 0.2s ease;
+  gap: 0.5ch;
+  transition: transform 0.2s ease, color 0.2s ease;
+  text-decoration: none;
 }
 
 .service-cta:hover {
+  text-decoration: none;
   text-decoration: underline;
+  transform: translateY(-3px) scale(1.03);
+  filter: brightness(70%);
 }
 
-/* Graphs Section */
-.charts-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-    gap: 2rem;
-    margin-top: 2rem;
+.service-cta .cta-icon {
+  width: 1em;
+  height: 1em;
+  /* if your SVG uses fill: */
+  fill: currentColor;
+  /* if it uses strokes */
+  stroke: currentColor;
+  /* optional spacing tweak if you need it: */
+  margin-right: 0.25em;
 }
 
-.chart-container {
-    background-color: var(--color-secondary);
-    padding: 1.5rem;
-    border-radius: 0.5rem;
-    border: 1px solid var(--color-primary);
-    box-shadow: 0 0 20px rgba(255, 71, 87, 0.2);
+/* ===== Booking ===== */
+
+
+.contact-info h2,
+.booking-form-wrapper h2 {
+  font-size: 2rem;
+  margin-bottom: 1rem;
+  color: var(--color-secondary);
+  text-align: center;
 }
 
-.chart-container h3 {
-    text-align: center;
-    margin-bottom: 1.5rem;
-    color: var(--color-text);
-    font-size: 1.25rem;
+.contact-list {
+  list-style: none;
+  padding: 0;
+  margin: 0;
 }
 
+.contact-list li {
+  margin-bottom: 0.75rem;
+  font-size: 1rem;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  transition: color 0.2s ease;
+}
+
+.contact-list a {
+  color: var(--color-text);
+  text-decoration: none;
+}
+
+.contact-list a:hover {
+  color: var(--color-primary);
+}
 
 /* Booking Form */
-.booking-form-wrapper {
-  max-width: 600px;
+
+/* ===== Book a Service (same styling as contact) ===== */
+.booking-section {
+  padding: 1rem 1rem;
+  background: var(--color-bg);
+}
+
+/* center the form on larger screens if you like */
+.booking-section .booking-form-wrapper {
+  max-width: 500px;
   margin: 0 auto;
-  background-color: var(--color-secondary);
-  padding: 2rem;
-  border-radius: 0.5rem;
-  border: 1px solid var(--color-primary);
 }
 
 .booking-form {
+  background: var(--color-bg);
+  padding: 2rem;
+  border-radius: 0.5rem;
+  box-shadow: 0 6px 18px rgba(0, 0, 0, 0.05);
   display: flex;
   flex-direction: column;
   gap: 1rem;
 }
 
+.form-row {
+  display: flex;
+  flex-direction: column;
+}
+
 .form-row label {
   margin-bottom: 0.25rem;
   font-weight: 500;
-  color: var(--color-text);
+  color: var(--color-secondary);
 }
 
 .form-row input,
 .form-row select,
 .form-row textarea {
-  padding: 0.75rem;
-  border: 1px solid var(--color-primary);
+  padding: 0.5rem;
+  border: 1px solid #ccc;
   border-radius: 0.25rem;
-  background-color: var(--color-bg);
-  color: var(--color-text);
   transition: border-color 0.2s ease, box-shadow 0.2s ease;
 }
 
 .form-row input:focus,
 .form-row select:focus,
 .form-row textarea:focus {
-  border-color: var(--color-accent);
-  box-shadow: 0 0 0 3px rgba(255, 71, 87, 0.3);
+  border-color: var(--color-primary);
+  box-shadow: 0 0 0 3px rgba(211, 47, 47, 0.2);
   outline: none;
 }
 
+/* Button hover tweak */
+.booking-form .btn-primary {
+  align-self: center;
+  display: inline-block;
+  padding: 0.75rem 2rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  color: #fff;
+  border: none;
+  border-radius: 2rem;
+  box-shadow: 0 6px 12px rgba(211, 47, 47, 0.3);
+  cursor: pointer;
+
+  /* initial red gradient */
+  background: linear-gradient(135deg, #D32F2F 0%, #FF6F61 100%);
+  background-size: 200% 200%;
+
+  /* animate both background and transform */
+  transition: background 0.4s ease, transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.booking-form .btn-primary:hover {
+  /* shift to green gradient */
+  background: linear-gradient(135deg, #28A745 0%, #A8E063 100%);
+  background-size: 200% 200%;
+
+
+  /* lift effect */
+  transform: translateY(-3px);
+  box-shadow: 0 12px 24px rgba(40, 167, 69, 0.35);
+}
+
+.booking-form .btn-primary:active,
+.booking-form .btn-primary:focus {
+  transform: translateY(-1px);
+  box-shadow: 0 4px 8px rgba(40, 167, 69, 0.2);
+  outline: none;
+}
+
+/* Container to center checkbox + text */
 .tos-row .checkbox-wrapper {
   display: flex;
   align-items: center;
+  /* vertical centering */
   gap: 0.75rem;
+  /* space between box and text */
+  margin-top: 1rem;
+  /* space above the row */
 }
 
+/* Hide default checkbox, size a custom one */
+.checkbox-wrapper input[type="checkbox"] {
+  /* hide native box but keep it accessible */
+  appearance: none;
+  -webkit-appearance: none;
+  width: 1.5rem;
+  height: 1.5rem;
+  border: 2px solid var(--color-primary);
+  border-radius: 0.25rem;
+  position: relative;
+  cursor: pointer;
+  transition: background 0.2s, border-color 0.2s;
+}
+
+/* Checkmark */
+.checkbox-wrapper input[type="checkbox"]::after {
+  content: "";
+  position: absolute;
+  top: 0.2rem;
+  left: 0.45rem;
+  width: 0.3rem;
+  height: 0.75rem;
+  border: solid #fff;
+  border-width: 0 2px 2px 0;
+  transform: rotate(45deg) scale(0);
+  transition: transform 0.2s ease;
+}
+
+/* Checked state */
+.checkbox-wrapper input[type="checkbox"]:checked {
+  background: var(--color-primary);
+  border-color: var(--color-primary);
+}
+
+.checkbox-wrapper input[type="checkbox"]:checked::after {
+  transform: rotate(45deg) scale(1);
+}
+
+/* Label text styling */
+.tos-row label {
+  font-size: 0.9rem;
+  color: var(--color-text);
+  line-height: 1.4;
+}
+
+.link-button {
+  /* ensure it lines up nicely with the custom box */
+  display: inline-block;
+  padding: 0;
+  margin: 0;
+  font: inherit;
+  color: var(--color-primary);
+  text-decoration: underline;
+  cursor: pointer;
+}
+
+/* Modal base */
+.modal {
+  position: fixed;
+  inset: 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  visibility: hidden;
+  opacity: 0;
+  transition: opacity 0.3s ease, visibility 0.3s ease;
+  z-index: 2000;
+}
+
+/* When active, fade in */
+.modal.active {
+  visibility: visible;
+  opacity: 1;
+}
+
+/* Dimmed backdrop */
+.modal-overlay {
+  position: absolute;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.6);
+}
+
+/* Modal window - add scrolling*/
+.modal-content {
+  background: #fff;
+  border-radius: 0.5rem;
+  max-width: 600px;
+  width: 90%;
+  padding: 2rem;
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.2);
+  transform: scale(0.9);
+  transition: transform 0.3s ease;
+  max-height: 80vh;
+  overflow-y: auto;
+}
+
+/* scrollbar inside modal styles */
+.modal-content::-webkit-scrollbar {
+  width: 8px;
+}
+
+.modal-content::-webkit-scrollbar-track {
+  background: #f1f1f1;
+}
+
+.modal-content::-webkit-scrollbar-thumb {
+  background: var(--color-primary);
+  border-radius: 4px;
+}
+
+.modal-content::-webkit-scrollbar-thumb:hover {
+  background: #b52a2a;
+}
+
+/* Close button */
+.modal-close {
+  position: absolute;
+  top: 0.5rem;
+  right: 1rem;
+  background: none;
+  border: none;
+  font-size: 1.5rem;
+  cursor: pointer;
+}
+
+/* On active, scale up */
+.modal.active .modal-content {
+  transform: scale(1);
+}
+
+/* “Link” button styling to match an inline link */
 .link-button {
   background: none;
   border: none;
@@ -568,26 +861,33 @@ body {
   cursor: pointer;
 }
 
-/* Modal */
-.modal-content {
-  background: #fff;
-  color: #333; /* Dark text for light background */
-  border-radius: 0.5rem;
-  max-width: 600px;
-  padding: 2rem;
-  max-height: 80vh;
-  overflow-y: auto;
+.link-button:hover {
+  opacity: 0.8;
 }
 
-.modal-content h2 {
-  color: var(--color-primary);
+
+/* contact us */
+
+/* Section wrapper */
+.contact-section {
+  padding: 1.2rem 0;
+  background: var(--color-bg);
+  text-align: center;
 }
 
-.modal-close {
-  color: #333;
+/* Title & subtitle */
+.section-title {
+  font-size: 2.5rem;
+  color: var(--color-secondary);
+  margin-bottom: 0.5rem;
 }
 
-/* Contact Section */
+.section-subtitle {
+  color: var(--color-text);
+  margin-bottom: 2rem;
+}
+
+/* Flex container for cards */
 .contact-cards {
   display: flex;
   flex-wrap: wrap;
@@ -595,22 +895,19 @@ body {
   gap: 2rem;
 }
 
+/* Individual card */
 .contact-card {
-  background: var(--color-secondary);
-  border-radius: 0.5rem;
+  background: #fff;
+  border-radius: 1.5rem;
   width: 280px;
   padding: 2rem 1.5rem;
   text-decoration: none;
-  color: var(--color-text);
-  border: 1px solid var(--color-primary);
+  color: var(--color-secondary);
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1);
   transition: transform 0.3s ease, box-shadow 0.3s ease;
 }
 
-.contact-card:hover {
-  transform: translateY(-8px);
-  box-shadow: 0 0 25px rgba(255, 71, 87, 0.3);
-}
-
+/* Icon container */
 .contact-icon {
   width: 4rem;
   height: 4rem;
@@ -622,92 +919,206 @@ body {
   justify-content: center;
   color: #fff;
   font-size: 1.5rem;
+  transition: background 0.3s ease, transform 0.3s ease;
 }
 
+/* Headings & text */
 .contact-card h3 {
   margin: 0.5rem 0;
   font-size: 1.25rem;
-  color: var(--color-text);
 }
 
 .contact-card p {
   margin: 0;
   color: var(--color-text);
-  opacity: 0.7;
+  transition: color 0.3s ease;
 }
 
-/* Footer */
+/* Hover / focus interactions */
+.contact-card:hover,
+.contact-card:focus {
+  transform: translateY(-8px);
+  box-shadow: 0 16px 30px rgba(0, 0, 0, 0.15);
+}
+
+.contact-card:hover .contact-icon,
+.contact-card:focus .contact-icon {
+  background: #64c9df;
+  transform: scale(1.1);
+}
+
+.contact-card:hover p,
+.contact-card:focus p {
+  color: var(--color-primary);
+}
+
+/* Footer Base */
 .site-footer {
   background: var(--color-secondary);
   color: #fff;
   font-size: 0.9rem;
   margin-top: 4rem;
-  border-top: 1px solid var(--color-primary);
 }
 
+/* Main containers */
 .footer-container {
   display: flex;
   flex-wrap: wrap;
   justify-content: space-between;
   gap: 2rem;
-  padding: 3rem 1rem;
-  max-width: 1200px;
-  margin: 0 auto;
+  padding: 3rem 0;
+}
+
+/* Brand/Logo area */
+.footer-brand {
+  flex: 1 1 240px;
+  margin-left: 1rem;
+  margin-right: 1rem;
+}
+
+.footer-logo {
+  width: 120px;
+  margin-bottom: 1rem;
+}
+
+.footer-brand p {
+  line-height: 1.5;
+  color: rgba(255, 255, 255, 0.8);
+}
+
+/* Quick Links */
+.footer-links {
+  flex: 1 1 160px;
+  text-align: center;
+  /* center everything in this column */
+}
+
+.footer-links h4 {
+  margin-bottom: 1rem;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+}
+
+.footer-links ul {
+  list-style: none;
+  display: inline-block;
+  /* shrink-wrap the list so it sits centered */
+}
+
+.footer-links li+li {
+  margin-top: 0.5rem;
+}
+
+.footer-links a {
+  color: rgba(255, 255, 255, 0.8);
+  text-decoration: none;
+  transition: color 0.3s ease;
 }
 
 .footer-links a:hover {
   color: var(--color-primary);
 }
 
+/* Contact Icons */
+.footer-social {
+  flex: 1 1 160px;
+  text-align: center;
+  /* center icons */
+}
+
+.footer-social h4 {
+  margin-bottom: 1rem;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+}
+
+.social-icons a {
+  color: rgba(255, 255, 255, 0.8);
+  font-size: 1.25rem;
+  margin: 0 0.75rem;
+  transition: color 0.3s ease, transform 0.3s ease;
+  text-decoration: none;
+}
+
 .social-icons a:hover {
   color: var(--color-primary);
   transform: translateY(-3px);
+  text-decoration: none;
 }
 
+/* Bottom Bar */
 .footer-bottom {
   background: rgba(0, 0, 0, 0.2);
   text-align: center;
   padding: 1rem 0;
 }
 
-/* Scrollbar */
+.footer-bottom p {
+  margin: 0;
+  color: rgba(255, 255, 255, 0.6);
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+  .footer-container {
+    flex-direction: column;
+    text-align: center;
+  }
+
+  .footer-links,
+  .footer-social {
+    margin-top: 2rem;
+  }
+}
+
+
+
+
+/* ==============================
+   Chrome / Edge / Safari Scrollbar
+   ============================== */
+
+/* size only on the root scrollbar */
 html::-webkit-scrollbar {
   width: 12px;
+  height: 12px;
 }
 
-html::-webkit-scrollbar-track {
-  background: var(--color-bg);
+/* track + track-piece + corner all transparent */
+html::-webkit-scrollbar-track,
+html::-webkit-scrollbar-track-piece,
+html::-webkit-scrollbar-corner {
+  background: transparent !important;
 }
 
+/* thumb stays primary color */
 html::-webkit-scrollbar-thumb {
   background-color: var(--color-primary);
   border-radius: 6px;
-  border: 3px solid var(--color-bg);
+  border: 3px solid transparent;
+  /* padding around thumb */
+  background-clip: content-box;
 }
 
+html::-webkit-scrollbar-thumb:hover {
+  background-color: #b52a2a;
+}
+
+/* ==================================
+   Firefox
+   ================================== */
 html {
   scrollbar-width: thin;
-  scrollbar-color: var(--color-primary) var(--color-bg);
+  scrollbar-color: var(--color-primary) transparent;
 }
 
-/* Animation */
-.animated {
-    opacity: 0;
-    transform: translateY(20px);
-    transition: opacity 0.5s ease-out, transform 0.5s ease-out;
-}
-
-.animated.is-visible {
-    opacity: 1;
-    transform: translateY(0);
-}
-
-/* Responsive tweaks */
+/* 5) Responsive tweaks */
 @media (max-width: 768px) {
   .hero-content h1 {
-    font-size: 2.5rem;
+    font-size: 2rem;
   }
+
   .hero-content p {
-    font-size: 1.125rem;
+    font-size: 1rem;
   }
 }
