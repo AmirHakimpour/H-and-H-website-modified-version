@@ -275,10 +275,16 @@ section {
   left: 0;
   width: 100%;
   height: 100%;
-  background: url('assets/science_world.png') center/cover no-repeat;
-  opacity: 0.2;
-  filter: grayscale(100%) contrast(120%);
+  background: url('assets/bg-ai-personal-red.png') center/cover no-repeat;
+  opacity: 0.4;
   animation: slow-pan 20s linear infinite alternate;
+}
+
+.hero::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(to top, rgba(10, 10, 10, 0.8), transparent);
 }
 
 @keyframes slow-pan {
@@ -449,6 +455,12 @@ section {
     color: var(--color-text-primary);
 }
 
+.chart-container {
+    position: relative;
+    height: 300px;
+    width: 100%;
+}
+
 .chart-card.full-width {
     grid-column: 1 / -1;
     text-align: center;
@@ -502,8 +514,54 @@ section {
     line-height: 1.6;
 }
 
-/* 6. CONTACT & BOOKING */
-.contact-section {
+/* 6. CONTACT INFO SECTION */
+.contact-info-section {
+    background-color: var(--color-surface);
+}
+
+.contact-info-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: calc(var(--spacing-unit) * 2);
+}
+
+.contact-info-card {
+    background: var(--color-bg);
+    border-radius: var(--border-radius);
+    padding: calc(var(--spacing-unit) * 2);
+    text-align: center;
+    border: 1px solid var(--color-border);
+    transition: transform var(--transition-smooth), box-shadow var(--transition-smooth), border-color var(--transition-smooth);
+    text-decoration: none;
+}
+
+.contact-info-card:hover {
+    transform: translateY(-10px);
+    border-color: var(--color-primary);
+    box-shadow: 0 15px 30px rgba(0,0,0,0.25);
+}
+
+.contact-info-icon {
+    font-size: 2.5rem;
+    color: var(--color-primary);
+    margin-bottom: var(--spacing-unit);
+}
+
+.contact-info-title {
+    color: var(--color-text-primary);
+    font-size: 1.5rem;
+    margin-bottom: calc(var(--spacing-unit) * 0.5);
+}
+
+.contact-info-text {
+    color: var(--color-text-secondary);
+    font-size: 1rem;
+    margin: 0;
+}
+
+
+/* 7. BOOKING SECTION */
+.booking-section {
     background-color: var(--color-bg);
 }
 
