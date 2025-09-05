@@ -164,6 +164,19 @@ section {
   height: 45px;
   transition: transform var(--transition-fast);
 }
+
+.logo-red {
+    display: none;
+}
+
+.site-header.scrolled .logo-white {
+    display: none;
+}
+
+.site-header.scrolled .logo-red {
+    display: block;
+}
+
 .logo:hover .logo-img {
     transform: rotate(-10deg) scale(1.1);
 }
@@ -173,6 +186,11 @@ section {
   font-weight: 700;
   color: var(--color-text-primary);
   letter-spacing: -0.5px;
+  transition: color var(--transition-fast);
+}
+
+.site-header.scrolled .logo-text {
+    color: var(--color-primary);
 }
 
 .nav-list {
@@ -363,6 +381,12 @@ section {
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
     gap: calc(var(--spacing-unit) * 2);
+}
+
+.service-card-link {
+    text-decoration: none;
+    color: inherit;
+    display: block; /* Make the anchor fill the grid cell */
 }
 
 .service-card {

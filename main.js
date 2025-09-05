@@ -79,6 +79,7 @@ document.addEventListener('DOMContentLoaded', () => {
         },
         scales: {
             y: {
+                beginAtZero: true,
                 grid: {
                     color: 'rgba(255, 255, 255, 0.1)',
                     borderColor: 'rgba(255, 255, 255, 0.1)'
@@ -112,18 +113,38 @@ document.addEventListener('DOMContentLoaded', () => {
     };
 
     const createCharts = () => {
-        // 1. Profitability Chart (Bar)
-        const profitabilityCtx = document.getElementById('profitabilityChart');
-        if (profitabilityCtx) {
-            new Chart(profitabilityCtx, {
+        // 1. Startup Growth Chart (Line)
+        const startupGrowthCtx = document.getElementById('startupGrowthChart');
+        if (startupGrowthCtx) {
+            new Chart(startupGrowthCtx, {
+                type: 'line',
+                data: {
+                    labels: ['Before AI', 'Cost Reduction', 'Profit Boost', 'Productivity Gain', 'Time-to-Market'],
+                    datasets: [{
+                        label: 'Growth Metrics',
+                        data: [0, 13, 6, 40, 5],
+                        borderColor: '#e53935',
+                        backgroundColor: 'rgba(229, 57, 53, 0.2)',
+                        fill: true,
+                        tension: 0.4
+                    }]
+                },
+                options: chartOptions
+            });
+        }
+
+        // 2. Business Benefits Chart (Bar)
+        const businessBenefitsCtx = document.getElementById('businessBenefitsChart');
+        if (businessBenefitsCtx) {
+            new Chart(businessBenefitsCtx, {
                 type: 'bar',
                 data: {
-                    labels: ['Average Startup', 'AI-Powered Startup'],
+                    labels: ['Marketing Conversions', 'Supply Chain Savings', 'Fraud Detection', 'Revenue Growth'],
                     datasets: [{
-                        label: 'Profitability Increase',
-                        data: [6, 13],
-                        backgroundColor: ['rgba(229, 57, 53, 0.5)', '#e53935'],
-                        borderColor: ['#e53935', '#e53935'],
+                        label: 'Benefit Percentage',
+                        data: [30, 20, 50, 30],
+                        backgroundColor: 'rgba(229, 57, 53, 0.7)',
+                        borderColor: '#e53935',
                         borderWidth: 1
                     }]
                 },
@@ -131,37 +152,41 @@ document.addEventListener('DOMContentLoaded', () => {
             });
         }
 
-        // 2. Sales Chart (Doughnut)
-        const salesCtx = document.getElementById('salesChart');
-        if (salesCtx) {
-            new Chart(salesCtx, {
-                type: 'doughnut',
+        // 3. Impacted Industries Chart (Area/Radar) - Using Radar for a more futuristic look
+        const impactedIndustriesCtx = document.getElementById('impactedIndustriesChart');
+        if (impactedIndustriesCtx) {
+            new Chart(impactedIndustriesCtx, {
+                type: 'radar',
                 data: {
-                    labels: ['Sales Increase', 'Remaining'],
+                    labels: ['Healthcare', 'Finance', 'Marketing', 'Retail', 'HR'],
                     datasets: [{
-                        data: [30, 70],
-                        backgroundColor: ['#e53935', 'rgba(229, 57, 53, 0.2)'],
-                        borderColor: 'transparent',
+                        label: 'Impact Score',
+                        data: [35, 25, 20, 15, 5],
+                        backgroundColor: 'rgba(229, 57, 53, 0.2)',
+                        borderColor: '#e53935',
+                        pointBackgroundColor: '#e53935',
+                        pointBorderColor: '#fff',
+                        pointHoverBackgroundColor: '#fff',
+                        pointHoverBorderColor: '#e53935'
                     }]
                 },
-                options: { ...chartOptions, cutout: '70%' }
-            });
-        }
-
-        // 3. Productivity Chart (Doughnut)
-        const productivityCtx = document.getElementById('productivityChart');
-        if (productivityCtx) {
-            new Chart(productivityCtx, {
-                type: 'doughnut',
-                data: {
-                    labels: ['Businesses with Productivity Gains', 'Other'],
-                    datasets: [{
-                        data: [77, 23],
-                        backgroundColor: ['#e53935', 'rgba(229, 57, 53, 0.2)'],
-                        borderColor: 'transparent',
-                    }]
-                },
-                options: { ...chartOptions, cutout: '70%' }
+                options: {
+                    ...chartOptions,
+                    scales: {
+                        r: {
+                            angleLines: { color: 'rgba(255, 255, 255, 0.1)' },
+                            grid: { color: 'rgba(255, 255, 255, 0.1)' },
+                            pointLabels: { color: '#b3b3b3' },
+                            ticks: {
+                                color: '#b3b3b3',
+                                backdropColor: 'transparent',
+                                callback: function(value) {
+                                    return value + '%';
+                                }
+                            }
+                        }
+                    }
+                }
             });
         }
     };
