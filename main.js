@@ -113,7 +113,7 @@ document.addEventListener('DOMContentLoaded', () => {
     };
 
     const createCharts = () => {
-        // 1. Startup Growth Chart (Line)
+        // 1. Startup Growth Chart (Line/Area)
         const startupGrowthCtx = document.getElementById('startupGrowthChart');
         if (startupGrowthCtx) {
             new Chart(startupGrowthCtx, {
@@ -122,7 +122,7 @@ document.addEventListener('DOMContentLoaded', () => {
                     labels: ['Before AI', 'Cost Reduction', 'Profit Boost', 'Productivity Gain', 'Time-to-Market'],
                     datasets: [{
                         label: 'Growth Metrics',
-                        data: [0, 13, 6, 40, 5],
+                        data: [0, 13, 6, 40, 25], // Updated Time-to-Market
                         borderColor: '#e53935',
                         backgroundColor: 'rgba(229, 57, 53, 0.2)',
                         fill: true,
@@ -139,7 +139,7 @@ document.addEventListener('DOMContentLoaded', () => {
             new Chart(businessBenefitsCtx, {
                 type: 'bar',
                 data: {
-                    labels: ['Marketing Conversions', 'Supply Chain Savings', 'Fraud Detection', 'Revenue Growth'],
+                    labels: ['Marketing', 'Supply Chain', 'Fraud Detect.', 'Revenue Growth'], // Shortened labels
                     datasets: [{
                         label: 'Benefit Percentage',
                         data: [30, 20, 50, 30],
@@ -152,11 +152,11 @@ document.addEventListener('DOMContentLoaded', () => {
             });
         }
 
-        // 3. Impacted Industries Chart (Area/Radar) - Using Radar for a more futuristic look
+        // 3. Impacted Industries Chart (Area)
         const impactedIndustriesCtx = document.getElementById('impactedIndustriesChart');
         if (impactedIndustriesCtx) {
             new Chart(impactedIndustriesCtx, {
-                type: 'radar',
+                type: 'line', // Line chart with fill enabled acts as an area chart
                 data: {
                     labels: ['Healthcare', 'Finance', 'Marketing', 'Retail', 'HR'],
                     datasets: [{
@@ -167,26 +167,12 @@ document.addEventListener('DOMContentLoaded', () => {
                         pointBackgroundColor: '#e53935',
                         pointBorderColor: '#fff',
                         pointHoverBackgroundColor: '#fff',
-                        pointHoverBorderColor: '#e53935'
+                        pointHoverBorderColor: '#e53935',
+                        fill: true,
+                        tension: 0.3
                     }]
                 },
-                options: {
-                    ...chartOptions,
-                    scales: {
-                        r: {
-                            angleLines: { color: 'rgba(255, 255, 255, 0.1)' },
-                            grid: { color: 'rgba(255, 255, 255, 0.1)' },
-                            pointLabels: { color: '#b3b3b3' },
-                            ticks: {
-                                color: '#b3b3b3',
-                                backdropColor: 'transparent',
-                                callback: function(value) {
-                                    return value + '%';
-                                }
-                            }
-                        }
-                    }
-                }
+                options: chartOptions
             });
         }
     };
@@ -204,6 +190,60 @@ document.addEventListener('DOMContentLoaded', () => {
     if (chartSection) {
         chartObserver.observe(chartSection);
     }
+
+    // --- Carousel Logic ---
+    const carousel = document.querySelector('.carousel');
+    if (carousel) {
+        const carouselInner = carousel.querySelector('.carousel-inner');
+        const items = carousel.querySelectorAll('.carousel-item');
+        const indicatorsContainer = carousel.parentElement.querySelector('.carousel-indicators');
+        const totalItems = items.length;
+        let currentIndex = 0;
+
+        // Create indicators
+        for (let i = 0; i < totalItems; i++) {
+            const button = document.createElement('button');
+            button.dataset.index = i;
+            if (i === 0) button.classList.add('active');
+            indicatorsContainer.appendChild(button);
+        }
+        const indicators = indicatorsContainer.querySelectorAll('button');
+
+        const updateCarousel = () => {
+            carouselInner.style.transform = `translateX(-${currentIndex * 100}%)`;
+            indicators.forEach((ind, i) => {
+                ind.classList.toggle('active', i === currentIndex);
+            });
+            items.forEach((item, i) => {
+                item.classList.toggle('active', i === currentIndex);
+            });
+        };
+
+        const showNext = () => {
+            currentIndex = (currentIndex + 1) % totalItems;
+            updateCarousel();
+        };
+
+        const showPrev = () => {
+            currentIndex = (currentIndex - 1 + totalItems) % totalItems;
+            updateCarousel();
+        };
+
+        const showItem = (index) => {
+            currentIndex = index;
+            updateCarousel();
+        };
+
+        carousel.querySelector('.next').addEventListener('click', showNext);
+        carousel.querySelector('.prev').addEventListener('click', showPrev);
+        indicators.forEach(ind => {
+            ind.addEventListener('click', () => showItem(parseInt(ind.dataset.index)));
+        });
+
+        // Auto-play
+        setInterval(showNext, 5000); // Change slide every 5 seconds
+    }
+
 
     // --- EmailJS Booking Form ---
     (function () {
