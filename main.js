@@ -1,212 +1,237 @@
-const header = document.querySelector('.site-header');
-const nav = document.querySelector('[data-nav]');
-const toggler = document.querySelector('[data-nav-toggler]');
-
-// scroll listener: toggle white bg
-window.addEventListener('scroll', () => {
-  if (window.scrollY > 50) {
-    header.classList.add('scrolled');
-  } else {
-    header.classList.remove('scrolled');
-  }
-});
-
-// mobile menu toggle
-toggler.addEventListener('click', () => {
-  nav.classList.toggle('active');
-  toggler.classList.toggle('open');
-  // reflect expanded state
-  const isOpen = nav.classList.contains('active');
-  toggler.setAttribute('aria-expanded', isOpen);
-});
-
-// close mobile menu when any link is clicked
-document.querySelectorAll('.nav-list a').forEach(link => {
-  link.addEventListener('click', () => {
-    if (nav.classList.contains('active')) {
-      nav.classList.remove('active');
-      toggler.classList.remove('open');
-    }
-  });
-});
-
-// feature card logics
 document.addEventListener('DOMContentLoaded', () => {
-  document.querySelectorAll('.feature-card').forEach(card => {
-    const readMore = card.querySelector('.feature-card__readmore');
-    const closeBtn = card.querySelector('.feature-card__close');
+    const header = document.querySelector('.site-header');
+    const nav = document.querySelector('[data-nav]');
+    const toggler = document.querySelector('[data-nav-toggler]');
+    const navLinks = document.querySelectorAll('.nav-list a');
 
-    readMore.addEventListener('click', () => {
-      card.classList.add('expanded');
+    // --- Sticky Header ---
+    const handleScroll = () => {
+        if (window.scrollY > 50) {
+            header.classList.add('scrolled');
+        } else {
+            header.classList.remove('scrolled');
+        }
+    };
+
+    // --- Mobile Menu Toggle ---
+    const toggleNav = () => {
+        nav.classList.toggle('active');
+        toggler.classList.toggle('open');
+        const isOpen = nav.classList.contains('active');
+        toggler.setAttribute('aria-expanded', isOpen);
+    };
+
+    // --- Active Nav Link Highlighting ---
+    const handleActiveLink = () => {
+        let currentSection = '';
+        const sections = document.querySelectorAll('main section');
+
+        sections.forEach(section => {
+            const sectionTop = section.offsetTop;
+            if (scrollY >= sectionTop - 100) {
+                currentSection = section.getAttribute('id');
+            }
+        });
+
+        navLinks.forEach(link => {
+            link.classList.remove('active');
+            if (link.getAttribute('href').substring(1) === currentSection) {
+                link.classList.add('active');
+            }
+        });
+    };
+
+    // Close mobile menu when a link is clicked
+    navLinks.forEach(link => {
+        link.addEventListener('click', () => {
+            if (nav.classList.contains('active')) {
+                toggleNav();
+            }
+        });
     });
 
-    closeBtn.addEventListener('click', () => {
-      card.classList.remove('expanded');
+    // --- Event Listeners ---
+    window.addEventListener('scroll', () => {
+        handleScroll();
+        handleActiveLink();
     });
-  });
+    toggler.addEventListener('click', toggleNav);
 
-  // Chart.js implementation
-  const revenueCtx = document.getElementById('revenueChart');
-  const efficiencyCtx = document.getElementById('efficiencyChart');
-  let revenueChart, efficiencyChart;
 
-  function createCharts() {
-    if (revenueCtx && !revenueChart) {
-      revenueChart = new Chart(revenueCtx, {
-        type: 'line',
-        data: {
-          labels: ['Q1', 'Q2', 'Q3', 'Q4', 'Q1 Next Year'],
-          datasets: [{
-            label: 'Revenue Growth with AI',
-            data: [120, 190, 300, 500, 800],
-            borderColor: '#D32F2F',
-            backgroundColor: 'rgba(211, 47, 47, 0.2)',
-            fill: true,
-            tension: 0.4
-          }]
-        },
-        options: {
-            responsive: true,
-            maintainAspectRatio: true,
-            animation: true,
-            scales: {
-                y: { ticks: { color: '#F5F5F5' } },
-                x: { ticks: { color: '#F5F5F5' } }
+    // --- Chart.js Implementation ---
+    const chartSection = document.getElementById('insights');
+    let chartsInitialized = false;
+
+    const chartOptions = {
+        responsive: true,
+        maintainAspectRatio: false,
+        plugins: {
+            legend: {
+                display: false,
             },
-            plugins: { legend: { labels: { color: '#F5F5F5' } } }
-        }
-      });
-    }
-    if (efficiencyCtx && !efficiencyChart) {
-      efficiencyChart = new Chart(efficiencyCtx, {
-        type: 'bar',
-        data: {
-          labels: ['Marketing', 'Sales', 'Support', 'Operations'],
-          datasets: [{
-            label: 'Efficiency Gain',
-            data: [65, 59, 80, 81],
-            backgroundColor: [
-              'rgba(211, 47, 47, 0.5)',
-              'rgba(211, 47, 47, 0.6)',
-              'rgba(211, 47, 47, 0.7)',
-              'rgba(211, 47, 47, 0.8)'
-            ],
-            borderColor: '#D32F2F',
-            borderWidth: 1
-          }]
+            tooltip: {
+                backgroundColor: '#0a0a0a',
+                titleColor: '#f5f5f5',
+                bodyColor: '#b3b3b3',
+                borderColor: '#333333',
+                borderWidth: 1,
+            }
         },
-        options: {
-            responsive: true,
-            maintainAspectRatio: true,
-            animation: true,
-            scales: {
-                y: { ticks: { color: '#F5F5F5' } },
-                x: { ticks: { color: '#F5F5F5' } }
+        scales: {
+            y: {
+                grid: {
+                    color: 'rgba(255, 255, 255, 0.1)',
+                    borderColor: 'rgba(255, 255, 255, 0.1)'
+                },
+                ticks: {
+                    color: '#b3b3b3',
+                    font: {
+                        size: 12,
+                    },
+                    callback: function(value) {
+                        return value + '%';
+                    }
+                }
             },
-            plugins: { legend: { labels: { color: '#F5F5F5' } } }
+            x: {
+                grid: {
+                    display: false
+                },
+                ticks: {
+                    color: '#b3b3b3',
+                    font: {
+                        size: 12,
+                    }
+                }
+            }
+        },
+        animation: {
+            duration: 1000,
+            easing: 'easeInOutCubic'
         }
-      });
-    }
-  }
+    };
 
-  if (revenueCtx && efficiencyCtx) {
+    const createCharts = () => {
+        // 1. Profitability Chart (Bar)
+        const profitabilityCtx = document.getElementById('profitabilityChart');
+        if (profitabilityCtx) {
+            new Chart(profitabilityCtx, {
+                type: 'bar',
+                data: {
+                    labels: ['Average Startup', 'AI-Powered Startup'],
+                    datasets: [{
+                        label: 'Profitability Increase',
+                        data: [6, 13],
+                        backgroundColor: ['rgba(229, 57, 53, 0.5)', '#e53935'],
+                        borderColor: ['#e53935', '#e53935'],
+                        borderWidth: 1
+                    }]
+                },
+                options: chartOptions
+            });
+        }
+
+        // 2. Sales Chart (Doughnut)
+        const salesCtx = document.getElementById('salesChart');
+        if (salesCtx) {
+            new Chart(salesCtx, {
+                type: 'doughnut',
+                data: {
+                    labels: ['Sales Increase', 'Remaining'],
+                    datasets: [{
+                        data: [30, 70],
+                        backgroundColor: ['#e53935', 'rgba(229, 57, 53, 0.2)'],
+                        borderColor: 'transparent',
+                    }]
+                },
+                options: { ...chartOptions, cutout: '70%' }
+            });
+        }
+
+        // 3. Productivity Chart (Doughnut)
+        const productivityCtx = document.getElementById('productivityChart');
+        if (productivityCtx) {
+            new Chart(productivityCtx, {
+                type: 'doughnut',
+                data: {
+                    labels: ['Businesses with Productivity Gains', 'Other'],
+                    datasets: [{
+                        data: [77, 23],
+                        backgroundColor: ['#e53935', 'rgba(229, 57, 53, 0.2)'],
+                        borderColor: 'transparent',
+                    }]
+                },
+                options: { ...chartOptions, cutout: '70%' }
+            });
+        }
+    };
+
     const chartObserver = new IntersectionObserver((entries, observer) => {
-      entries.forEach(entry => {
-        if (entry.isIntersecting) {
-          createCharts();
-          observer.unobserve(entry.target);
-        }
-      });
-    }, { threshold: 0.1 });
+        entries.forEach(entry => {
+            if (entry.isIntersecting && !chartsInitialized) {
+                createCharts();
+                chartsInitialized = true;
+                observer.unobserve(entry.target);
+            }
+        });
+    }, { threshold: 0.2 });
 
-    chartObserver.observe(revenueCtx);
-  }
-
-  window.addEventListener('resize', () => {
-      if(revenueChart) revenueChart.resize();
-      if(efficiencyChart) efficiencyChart.resize();
-  });
-});
-
-
-//booking form
-(function () {
-  // Initialize EmailJS with your Public Key (Account → General)
-  emailjs.init('U1Ivr5jUgrrQjxibM');
-})();
-
-// Your EmailJS identifiers
-const SERVICE_ID = 'service_6xd2q1g';
-const BOOKING_TEMPLATE = 'template_etf97vp';  // internal notification
-const AUTO_REPLY_TEMPLATE = 'template_hj0k37e';  // your Auto-Reply template
-const USER_ID = 'U1Ivr5jUgrrQjxibM';
-
-document
-  .getElementById('booking-form')
-  .addEventListener('submit', function (e) {
-
-    //  Honeypot check – abort if the hidden field has a value
-    if (this['bot-field'].value) {
-      console.warn('Spam bot caught – submission aborted.');
-      return;
+    if (chartSection) {
+        chartObserver.observe(chartSection);
     }
 
-    //prevent the normal submit
-    e.preventDefault();
+    // --- EmailJS Booking Form ---
+    (function () {
+        emailjs.init('U1Ivr5jUgrrQjxibM');
+    })();
 
-    //Send the booking notification to your inbox
-    emailjs.sendForm(
-      SERVICE_ID,
-      BOOKING_TEMPLATE,
-      this,      // the <form> element
-      USER_ID
-    )
-      .then(() => {
-        // After that succeeds, send the auto-reply back to the user
-        //    Grab the form values via their `name="..."` attributes:
-        const name = this.from_name.value;
-        const title = this.service_type.value;
-        const reply_to = this.reply_to.value;
+    const SERVICE_ID = 'service_6xd2q1g';
+    const BOOKING_TEMPLATE = 'template_etf97vp';
+    const AUTO_REPLY_TEMPLATE = 'template_hj0k37e';
+    const USER_ID = 'U1Ivr5jUgrrQjxibM';
 
-        return emailjs.send(
-          SERVICE_ID,
-          AUTO_REPLY_TEMPLATE,
-          {
-            name,
-            title,
-            reply_to,
-          },
-          USER_ID
-        );
-      })
-      .then(() => {
-        alert('Booking request sent! A confirmation email is on its way.');
-        this.reset();
-      })
-      .catch(err => {
-        console.error('EmailJS error', err);
-        alert('Sorry, something went wrong. Please try again later.');
-      });
-  });
+    const bookingForm = document.getElementById('booking-form');
+    if (bookingForm) {
+        bookingForm.addEventListener('submit', function (e) {
+            e.preventDefault();
 
-// Modal open/close handlers
-const tosModal = document.getElementById('tos-modal');
-const openBtns = document.querySelectorAll('[data-modal-open]');
-const closeBtns = document.querySelectorAll('[data-modal-close], .modal-close');
+            if (this['bot-field'].value) {
+                console.warn('Spam bot caught – submission aborted.');
+                return;
+            }
 
-// open
-openBtns.forEach(btn =>
-  btn.addEventListener('click', () => tosModal.classList.add('active'))
-);
+            emailjs.sendForm(SERVICE_ID, BOOKING_TEMPLATE, this, USER_ID)
+                .then(() => {
+                    const name = this.from_name.value;
+                    const title = this.service_type.value;
+                    const reply_to = this.reply_to.value;
 
-// close (overlay & “×”)
-closeBtns.forEach(el =>
-  el.addEventListener('click', () => tosModal.classList.remove('active'))
-);
+                    return emailjs.send(SERVICE_ID, AUTO_REPLY_TEMPLATE, { name, title, reply_to }, USER_ID);
+                })
+                .then(() => {
+                    alert('Booking request sent! A confirmation email is on its way.');
+                    this.reset();
+                })
+                .catch(err => {
+                    console.error('EmailJS error', err);
+                    alert('Sorry, something went wrong. Please try again later.');
+                });
+        });
+    }
 
-// also close on Escape key
-document.addEventListener('keyup', e => {
-  if (e.key === 'Escape' && tosModal.classList.contains('active')) {
-    tosModal.classList.remove('active');
-  }
+    // --- TOS Modal ---
+    const tosModal = document.getElementById('tos-modal');
+    const openBtns = document.querySelectorAll('[data-modal-open]');
+    const closeBtns = document.querySelectorAll('[data-modal-close], .modal-close');
+
+    const openModal = () => tosModal.classList.add('active');
+    const closeModal = () => tosModal.classList.remove('active');
+
+    openBtns.forEach(btn => btn.addEventListener('click', openModal));
+    closeBtns.forEach(el => el.addEventListener('click', closeModal));
+    document.addEventListener('keyup', e => {
+        if (e.key === 'Escape' && tosModal.classList.contains('active')) {
+            closeModal();
+        }
+    });
 });
