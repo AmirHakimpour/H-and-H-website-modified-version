@@ -1,39 +1,15 @@
-# AmirHakimpour.github.io
-H&amp;H Business Insights site
-# H&H Business Insights
+# H&H Business Insights Website Refactor
 
-**Live Site:** [https://hnhbi.com](https://hnhbi.com)
+This project is a refactor of the H&H Business Insights website to add Osmo.supply–style scroll responses and transitions.
 
-H&H Business Insights is a modern consulting firm offering AI-powered, data-driven business strategies for small to medium-sized businesses. Our focus is on helping organizations grow through automation, analytics, and smart digital marketing.
+## Running Locally
 
-## 🚀 What This Website Includes
+To run the project locally, simply open the `index.html` file in your web browser.
 
-- Company introduction
-- Overview of services offered
-- Contact form (EmailJS integration)
-- Responsive design with smooth navigation
-- SEO-optimized structure for visibility
+## Animation Entry Points
 
-## 🛠️ Technologies Used
+All animations are initialized in the `js/animations.js` file. The `animations.init()` function is called from `js/main.js` when the DOM is loaded.
 
-- HTML5, CSS3, JavaScript
-- Bootstrap (optional if used)
-- EmailJS for contact form handling
-- GitHub Pages for hosting
+## QA Checklist
 
-## 🌐 Deployment
-
-This site is deployed using **GitHub Pages** and connected to a custom domain:  
-**[hnhbi.com](https://hnhbi.com)**
-
-To update the live site:
-1. Commit changes to the `main` branch.
-2. GitHub Pages auto-deploys the latest version.
-3. Domain is managed via Namecheap with proper DNS records.
-
-## 📬 Contact
-
-For business inquiries:  
-**support@hnhbi.com**
-
-
+A manual QA checklist can be found in the `/qa/QA.md` file.
