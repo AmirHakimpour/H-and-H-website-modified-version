@@ -80,7 +80,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
     if (!prefersReducedMotion) {
         // Scroll Animations with Intersection Observer
-        const animatedElements = document.querySelectorAll('.service-card, .section-title, .booking-form');
+        const animatedElements = document.querySelectorAll('.service-card, .section-title, .booking-form, .info-card, .case-study-card, .testimonial-card, .blog-post-card, .faq-item, .resource-download-section');
         const observer = new IntersectionObserver((entries) => {
             entries.forEach(entry => {
                 if (entry.isIntersecting) {
@@ -98,6 +98,15 @@ document.addEventListener('DOMContentLoaded', () => {
             observer.observe(el);
         });
 
+        // FAQ Animations
+        document.querySelectorAll('.faq-item').forEach(item => {
+            item.addEventListener('toggle', event => {
+                if (item.open) {
+                    // Any additional open animations can go here
+                }
+            });
+        });
+
         // Parallax Hero Background
         const heroBackground = document.querySelector('.hero-background');
         if (heroBackground) {
@@ -106,6 +115,19 @@ document.addEventListener('DOMContentLoaded', () => {
                 heroBackground.style.transform = `translateY(${offset * 0.4}px)`;
             });
         }
+    }
+
+    // --- RESOURCE FORM SUBMISSION ---
+    const resourceForm = document.getElementById('resource-form');
+    if (resourceForm) {
+        resourceForm.addEventListener('submit', (e) => {
+            e.preventDefault();
+            const email = resourceForm.querySelector('input[name="email"]').value;
+            if (email) {
+                alert(`Thank you! The whitepaper will be sent to ${email}.`);
+                resourceForm.reset();
+            }
+        });
     }
 
     // --- CHART.JS INTEGRATION ---
@@ -133,8 +155,8 @@ function renderAiChart(canvas) {
     beforeAiGradient.addColorStop(1, 'rgba(106, 13, 173, 0.2)');
 
     const afterAiGradient = ctx.createLinearGradient(0, 0, 0, 400);
-    afterAiGradient.addColorStop(0, 'rgba(0, 245, 212, 0.9)');
-    afterAiGradient.addColorStop(1, 'rgba(0, 245, 212, 0.3)');
+    afterAiGradient.addColorStop(0, 'rgba(139, 0, 0, 0.9)');
+    afterAiGradient.addColorStop(1, 'rgba(139, 0, 0, 0.3)');
 
     const chartData = {
         labels: [
@@ -157,7 +179,7 @@ function renderAiChart(canvas) {
                 label: 'After AI',
                 data: [32, 27, 6, 3500, 45],
                 backgroundColor: afterAiGradient,
-                borderColor: 'rgba(0, 245, 212, 1)',
+                borderColor: 'rgba(139, 0, 0, 1)',
                 borderWidth: 1,
                 borderRadius: 5,
             }
@@ -171,17 +193,21 @@ function renderAiChart(canvas) {
             responsive: true,
             maintainAspectRatio: false,
             animation: {
-                duration: 1500,
-                easing: 'easeInOutQuart'
+                duration: 2000,
+                easing: 'easeOutQuart'
             },
             scales: {
                 y: {
                     beginAtZero: true,
                     grid: {
-                        color: 'rgba(255, 255, 255, 0.1)'
+                        color: 'rgba(255, 255, 255, 0.1)',
+                        borderColor: 'rgba(255, 255, 255, 0.1)'
                     },
                     ticks: {
-                        color: '#A0A0A0'
+                        color: '#A0A0A0',
+                        font: {
+                            size: 12
+                        }
                     }
                 },
                 x: {
@@ -189,7 +215,10 @@ function renderAiChart(canvas) {
                         display: false
                     },
                     ticks: {
-                        color: '#A0A0A0'
+                        color: '#A0A0A0',
+                        font: {
+                            size: 12
+                        }
                     }
                 }
             },
@@ -206,18 +235,21 @@ function renderAiChart(canvas) {
                     backgroundColor: '#000',
                     titleFont: { size: 16 },
                     bodyFont: { size: 14 },
+                    padding: 12,
                     callbacks: {
                         label: function(context) {
-                            let label = context.dataset.label || '';
-                            if (label) {
-                                label += ': ';
+                            const rawLabel = context.label;
+                            const value = context.parsed.y;
+                            if (rawLabel.includes('%')) {
+                                return `${value}% ${rawLabel.replace(' (%)', '')}`;
                             }
-                            if (context.parsed.y !== null) {
-                                label += context.parsed.y;
-                                if(context.label.includes('%')) label += '%';
-                                if(context.label.includes('months')) label += ' months';
+                            if (rawLabel.includes('months')) {
+                                return `${value} ${rawLabel.replace(' (months)', '')}`;
                             }
-                            return label;
+                            if (rawLabel.includes('users')) {
+                                return `${value.toLocaleString()} ${rawLabel.replace(' (avg users)', '')}`;
+                            }
+                            return `${context.dataset.label}: ${value}`;
                         }
                     }
                 }

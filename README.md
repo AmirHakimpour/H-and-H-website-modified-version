@@ -50,6 +50,15 @@ The site is built with vanilla HTML, CSS, and JavaScript. No build tools are req
 - It is placed in the navbar (top-left) and the footer.
 - A subtle hover effect (`transform: scale(1.1)`) is applied to the navbar logo via CSS for a small, interactive touch.
 
+### New Sections Added
+- **About Us / Our Mission:** A brief introduction to the company's mission.
+- **Why Choose Us:** A grid of cards highlighting key value propositions.
+- **Case Studies / Success Stories:** A section showcasing metrics-driven results.
+- **Testimonials:** Client feedback presented in styled cards.
+- **FAQ Section:** An interactive, collapsible Q&A section built with the `<details>` and `<summary>` elements.
+- **Insights Hub / Blog Preview:** A grid of placeholder blog posts.
+- **Free Resource Download:** A CTA section with an email capture form for a whitepaper.
+
 ---
 
 ## How to Test
