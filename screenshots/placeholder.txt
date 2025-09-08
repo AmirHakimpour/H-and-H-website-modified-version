@@ -1,0 +1,3 @@
+Please add desktop and mobile screenshots of the final website design here.
+- desktop_screenshot.png
+- mobile_screenshot.png

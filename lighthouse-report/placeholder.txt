@@ -1,0 +1,2 @@
+Please add the Lighthouse JSON or HTML report file here after running a performance audit on the deployed website.
+- lighthouse_report.html
