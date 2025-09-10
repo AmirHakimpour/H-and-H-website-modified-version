@@ -1,0 +1,115 @@
+{
+  "site": {
+    "title": "H&H Business Insights",
+    "baseUrl": "https://hnhbi.com",
+    "contact": {
+      "phone": "+1 (604) 388-9748",
+      "email": "support@hnhbi.com"
+    },
+    "social": {
+      "instagram": "https://instagram.com/aibinsight",
+      "linkedin": "https://www.linkedin.com/company/aibinsight"
+    }
+  },
+  "homepage": {
+    "hero": {
+      "headline": "Smarter Strategy. Faster Growth. Powered by AI.",
+      "subhead": "We help businesses scale efficiently through data, AI, and actionable insights.",
+      "primaryCta": {
+        "text": "Book Strategy Call",
+        "url": "/contact.html"
+      },
+      "secondaryCta": {
+        "text": "View Dashboard",
+        "url": "/data-lab.html"
+      }
+    },
+    "whyChooseUs": [
+      {
+        "title": "AI-Powered Insights",
+        "description": "Advanced analytics & machine learning. Our AI engine ingests raw data to surface trends, anomaly detection, and predictive forecasts, so you stay two steps ahead of the competition."
+      },
+      {
+        "title": "ROI-Driven Growth",
+        "description": "Clear KPIs & transparent reporting. We define and track your key metrics in real-time, ensuring every dollar you invest delivers measurable ROI through transparent dashboards."
+      },
+      {
+        "title": "Tailored Strategies",
+        "description": "Custom go-to-market & pricing plans. From product positioning to pricing, we craft strategies that fit your unique market and customer needs, maximizing adoption and revenue."
+      },
+      {
+        "title": "Collaborative Partnership",
+        "description": "Workshops, training & knowledge transfer. We work side-by-side with your team, delivering hands-on workshops and training so your people can immediately apply new skills."
+      }
+    ]
+  },
+  "services": [
+    {
+      "slug": "strategic-business-planning",
+      "title": "Strategic Business Planning",
+      "description": "Competitive analysis using AI-driven insights, Business model innovation & validation, Market entry and positioning strategy, Long-term growth roadmaps.",
+      "cta": {
+        "text": "Book a Strategy Session",
+        "url": "/contact.html?service=strategic-business-planning"
+      }
+    },
+    {
+      "slug": "startup-founder-advisory",
+      "title": "Startup & Founder Advisory",
+      "description": "Lean startup coaching & MVP validation, Go-to-market strategy with data-backed decisions, Investor pitch prep and funding support, Predictive analytics for early-stage scaling.",
+      "cta": {
+        "text": "Apply for Startup Advisory",
+        "url": "/contact.html?service=startup-founder-advisory"
+      }
+    },
+    {
+      "slug": "sme-growth-consulting",
+      "title": "SME Growth Consulting",
+      "description": "Customer segmentation powered by AI, Expansion & diversification strategy, Process optimization and operational streamlining, Value proposition refinement using machine learning tools.",
+      "cta": {
+        "text": "Get a Free Growth Audit",
+        "url": "/contact.html?service=sme-growth-consulting"
+      }
+    },
+    {
+      "slug": "ai-for-business-innovation",
+      "title": "AI for Business Innovation",
+      "description": "AI-readiness assessments, No-code/low-code AI tool integration, Automation of sales, support, and marketing workflows, Use-case identification and adoption roadmap.",
+      "cta": {
+        "text": "Start Your AI Journey",
+        "url": "/contact.html?service=ai-for-business-innovation"
+      }
+    },
+    {
+      "slug": "ai-enhanced-forecasting",
+      "title": "AI-Enhanced Forecasting & Decision-Making",
+      "description": "ML-based revenue & sales forecasting, Scenario planning and cost optimization, AI-powered budgeting and resource planning.",
+      "cta": {
+        "text": "Book a Forecasting Demo",
+        "url": "/contact.html?service=ai-enhanced-forecasting"
+      }
+    },
+    {
+      "slug": "ai-in-marketing-cx",
+      "title": "AI in Marketing & CX",
+      "description": "Predictive customer insights & segmentation, Smart CRM integration and AI-based lead scoring, Personalized content generation with generative AI.",
+      "cta": {
+        "text": "Explore AI Marketing Tools",
+        "url": "/contact.html?service=ai-in-marketing-cx"
+      }
+    },
+    {
+      "slug": "workshops-executive-training",
+      "title": "Workshops & Executive Training",
+      "description": "AI for Entrepreneurs: Practical Applications, Strategic Thinking in the Age of AI, Digital Transformation Bootcamps, Custom training for teams and incubators.",
+      "cta": {
+        "text": "Request a Training Plan",
+        "url": "/contact.html?service=workshops-executive-training"
+      }
+    }
+  ],
+  "termsOfService": {
+    "lastUpdated": "June 10, 2025",
+    "content": "..."
+  }
+}

@@ -1,0 +1,57 @@
+.form-wrapper {
+    background-color: var(--bg-800);
+    padding: var(--space-xl);
+    border-radius: var(--border-radius);
+    border: 1px solid var(--glass);
+}
+
+.contact-form {
+  display: grid;
+  gap: var(--space-md);
+}
+
+.form-row {
+  display: flex;
+  flex-direction: column;
+
+  label {
+    margin-bottom: var(--space-xs);
+    font-weight: 500;
+    color: var(--text-secondary);
+  }
+
+  input,
+  select,
+  textarea {
+    padding: var(--space-sm);
+    border: 1px solid var(--glass);
+    border-radius: var(--border-radius);
+    transition: border-color 0.2s ease, box-shadow 0.2s ease;
+    background-color: var(--bg-900);
+    color: var(--text-primary);
+    font-family: var(--font-primary);
+    font-size: 1rem;
+
+    &:focus {
+      border-color: var(--accent-cyan);
+      box-shadow: 0 0 0 3px rgba(0, 229, 255, 0.2);
+      outline: none;
+    }
+  }
+
+  textarea {
+      min-height: 150px;
+      resize: vertical;
+  }
+}
+
+/* Update the button to use the base .btn-primary class */
+.contact-form .btn-primary {
+  width: 100%;
+  margin-top: var(--space-sm);
+  padding: var(--space-md);
+  font-size: 1.125rem;
+
+  // The hover effect is now handled by the base .btn-primary class in _base.scss
+  // No more green!
+}

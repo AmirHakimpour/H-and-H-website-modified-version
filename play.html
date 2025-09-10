@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Strategy Sprint - H&H Business Insights</title>
+
+    <meta name="description" content="Test your strategic thinking with the Strategy Sprint mini-game.">
+    <link rel="canonical" href="https://hnhbi.com/play.html">
+
+    <!-- Stylesheets -->
+    <link rel="stylesheet" href="assets/css/design-tokens.css">
+    <link rel="stylesheet" href="assets/css/style.css">
+
+    <!-- Preload Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;700&family=Sora:wght@400;700&display=swap" rel="stylesheet">
+</head>
+<body class="dark-mode">
+
+    <header class="site-header" id="main-header">
+        <!-- Header will be injected by JS -->
+    </header>
+
+    <main>
+        <section class="page-header">
+            <div class="container">
+                <h1>Strategy Sprint</h1>
+                <p>Match the Key Performance Indicators (KPIs) to the correct strategies in 60 seconds!</p>
+            </div>
+        </section>
+
+        <section class="container game-container">
+            <div class="game-ui">
+                <div class="game-stat">
+                    <span>Time Left:</span>
+                    <span id="timer">60</span>s
+                </div>
+                <div class="game-stat">
+                    <span>Score:</span>
+                    <span id="score">0</span>
+                </div>
+                <div class="game-stat">
+                    <span>High Score:</span>
+                    <span id="high-score">0</span>
+                </div>
+            </div>
+
+            <div class="game-board" id="game-board">
+                <div class="kpi-cards-container" id="kpi-cards">
+                    <!-- KPI cards will be injected here -->
+                </div>
+                <div class="strategy-tiles-container" id="strategy-tiles">
+                    <!-- Strategy tiles will be injected here -->
+                </div>
+            </div>
+
+            <div class="game-result" id="game-result" style="display: none;">
+                <h2>Time's Up!</h2>
+                <p>Your final score is <span id="final-score"></span>.</p>
+                <p id="result-insight"></p>
+                <button id="play-again-btn" class="btn btn-primary">Play Again</button>
+            </div>
+        </section>
+    </main>
+
+    <footer class="site-footer" id="main-footer">
+        <!-- Footer will be injected by JS -->
+    </footer>
+
+    <script src="assets/js/modules/layout.js"></script>
+    <script src="assets/js/play.js"></script>
+</body>
+</html>

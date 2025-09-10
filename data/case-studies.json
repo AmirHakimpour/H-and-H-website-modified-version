@@ -1,0 +1,43 @@
+{
+  "caseStudies": [
+    {
+      "slug": "saas-growth-engine",
+      "client": "Innovate SaaS",
+      "logo": "/assets/images/logos/innovate-saas-logo.svg",
+      "title": "Scaling a B2B SaaS Platform with AI-Driven Lead Scoring",
+      "tags": ["SaaS", "B2B", "AI"],
+      "image": "/assets/images/case-studies/saas-growth.jpg",
+      "metrics": {
+        "before": "12% Lead-to-Close Rate",
+        "after": "28% Lead-to-Close Rate"
+      },
+      "summary": "Innovate SaaS struggled with a lengthy sales cycle and low conversion rates. We implemented an AI-powered lead scoring model that prioritized high-intent prospects, resulting in a 133% increase in sales efficiency."
+    },
+    {
+      "slug": "ecommerce-personalization",
+      "client": "Luxe Retail Co.",
+      "logo": "/assets/images/logos/luxe-retail-logo.svg",
+      "title": "Boosting AOV by 40% Through Hyper-Personalization",
+      "tags": ["E-commerce", "Retail"],
+      "image": "/assets/images/case-studies/ecommerce-boost.jpg",
+      "metrics": {
+        "before": "$85 Average Order Value",
+        "after": "$119 Average Order Value"
+      },
+      "summary": "Luxe Retail Co. had a large product catalog but a generic user experience. By integrating a real-time personalization engine, we delivered tailored product recommendations that increased AOV by 40%."
+    },
+    {
+      "slug": "healthcare-automation",
+      "client": "HealthBridge Clinics",
+      "logo": "/assets/images/logos/healthbridge-logo.svg",
+      "title": "Reducing Patient Onboarding Time by 70% with Automation",
+      "tags": ["Healthcare", "Automation"],
+      "image": "/assets/images/case-studies/healthcare-automation.jpg",
+      "metrics": {
+        "before": "25-Minute Manual Onboarding",
+        "after": "7-Minute Automated Onboarding"
+      },
+      "summary": "HealthBridge Clinics was losing potential patients due to a cumbersome, paper-based onboarding process. We designed and deployed an automated workflow that digitized forms and reduced staff workload."
+    }
+  ]
+}

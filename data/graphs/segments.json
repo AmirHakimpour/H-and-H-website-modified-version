@@ -1,0 +1,21 @@
+{
+  "title": "Monthly Revenue by Plan",
+  "labels": ["Jan", "Feb", "Mar", "Apr", "May", "Jun"],
+  "datasets": [
+    {
+      "label": "Basic Plan",
+      "data": [5000, 5200, 5500, 5400, 5600, 5800],
+      "backgroundColor": "rgba(0, 229, 255, 0.6)"
+    },
+    {
+      "label": "Pro Plan",
+      "data": [3000, 3100, 3400, 3800, 4000, 4100],
+      "backgroundColor": "rgba(255, 77, 166, 0.6)"
+    },
+    {
+      "label": "Enterprise Plan",
+      "data": [1500, 1500, 1800, 1800, 2200, 2500],
+      "backgroundColor": "rgba(255, 200, 87, 0.6)"
+    }
+  ]
+}

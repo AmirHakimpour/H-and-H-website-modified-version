@@ -1,0 +1,120 @@
+.site-header {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: 1000;
+  padding: var(--space-md) 0;
+  background: transparent;
+  transition: background-color 0.3s ease, box-shadow 0.3s ease, backdrop-filter 0.3s ease;
+
+  &.scrolled {
+    background-color: var(--glass);
+    backdrop-filter: blur(10px);
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
+  }
+}
+
+.nav-container {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.logo {
+  display: flex;
+  align-items: center;
+  text-decoration: none;
+
+  .logo-img {
+    height: 40px;
+    width: auto;
+    transition: opacity 0.3s ease;
+  }
+
+  .logo-red {
+    display: none;
+  }
+
+  .logo-text {
+    margin-left: var(--space-sm);
+    font-family: var(--font-secondary);
+    font-size: 1.25rem;
+    font-weight: 700;
+    color: var(--text-primary);
+    transition: color 0.3s ease;
+  }
+}
+
+.site-header.scrolled .logo .logo-white {
+    display: none;
+}
+.site-header.scrolled .logo .logo-red {
+    display: block;
+}
+.site-header.scrolled .logo .logo-text {
+    color: var(--brand-red);
+}
+
+
+.nav-list {
+  list-style: none;
+  display: flex;
+  align-items: center;
+  gap: var(--space-lg);
+}
+
+.nav-list a {
+  font-family: var(--font-primary);
+  font-weight: 700;
+  text-decoration: none;
+  color: var(--text-secondary);
+  transition: color 0.2s;
+
+  &:hover {
+    color: var(--text-primary);
+  }
+}
+
+.nav-cta {
+    margin-left: var(--space-lg);
+}
+
+.nav-toggle {
+  background: none;
+  border: none;
+  cursor: pointer;
+  display: none; // Shown in _responsive.scss
+
+  .hamburger,
+  &::before,
+  &::after {
+    content: "";
+    display: block;
+    width: 24px;
+    height: 3px;
+    border-radius: 2px;
+    background: var(--text-primary);
+    transition: transform 0.3s, background-color 0.3s;
+  }
+
+  &::before {
+    transform: translateY(-7px);
+  }
+
+  &::after {
+    transform: translateY(4px);
+  }
+
+  &.open .hamburger {
+    transform: rotate(45deg) translate(5px, 5px);
+  }
+
+  &.open::before {
+    transform: rotate(90deg) translate(0, -0);
+  }
+
+  &.open::after {
+    opacity: 0;
+  }
+}

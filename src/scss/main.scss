@@ -1,0 +1,18 @@
+// This file is the entry point for the SASS compiler.
+// It uses the modern @use rule to load all partials.
+
+// 1. Base styles, variables, and resets
+@use 'base';
+
+// 2. Component styles
+@use 'header';
+@use 'hero';
+@use 'cards';
+@use 'forms';
+@use 'carousel';
+@use 'footer';
+@use 'data-lab';
+@use 'game';
+
+// 3. Responsive styles (should come last)
+@use 'responsive';

@@ -1,0 +1,130 @@
+/* ---- Base Card Styles ---- */
+.card {
+    background-color: var(--bg-800);
+    border: 1px solid var(--glass);
+    border-radius: var(--border-radius);
+    transition: transform 0.3s ease, background-color 0.3s ease;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    padding: var(--space-lg);
+
+    &:hover {
+        transform: translateY(-8px);
+        background-color: var(--glass);
+    }
+}
+
+/* ---- Grid Layouts ---- */
+.services-grid, .feature-grid, .contact-cards {
+  display: grid;
+  gap: var(--space-lg);
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+}
+
+
+/* ---- Service Cards ---- */
+.service-card {
+  text-align: center;
+
+  .service-icon {
+    width: 48px;
+    height: 48px;
+    margin: 0 auto var(--space-md);
+    color: var(--accent-cyan);
+  }
+
+  h3 {
+    font-family: var(--font-secondary);
+    font-size: 1.5rem;
+    color: var(--text-primary);
+    margin-bottom: var(--space-sm);
+  }
+
+  p {
+    color: var(--text-secondary);
+    line-height: 1.6;
+    flex-grow: 1;
+    margin-bottom: var(--space-lg);
+  }
+
+  .service-cta {
+    display: inline-block;
+    font-weight: 700;
+    color: var(--accent-gold);
+    text-decoration: none;
+    margin-top: auto;
+
+    &:hover {
+      text-decoration: underline;
+    }
+  }
+}
+
+
+/* ---- Feature Cards (Why Choose Us) ---- */
+.feature-card {
+  text-align: left;
+
+  .feature-icon {
+    width: 40px;
+    height: 40px;
+    color: var(--accent-magenta);
+    margin-bottom: var(--space-md);
+  }
+
+  h3 {
+    font-family: var(--font-secondary);
+    font-size: 1.25rem;
+    color: var(--text-primary);
+    margin-bottom: var(--space-xs);
+  }
+
+  p {
+    color: var(--text-secondary);
+    line-height: 1.6;
+  }
+}
+
+
+/* ---- Contact Cards ---- */
+// Styles to be completed later, setting basic dark theme for now.
+.contact-card {
+  background-color: var(--bg-800);
+  color: var(--text-primary);
+  padding: var(--space-lg);
+}
+
+
+/* ---- Case Study Cards ---- */
+.case-study-card {
+    text-align: left;
+
+    .card-image-placeholder {
+        width: 100%;
+        height: 200px;
+        background-color: var(--bg-900);
+        border-radius: var(--border-radius);
+        margin-bottom: var(--space-md);
+        border: 1px solid var(--glass);
+    }
+
+    .client-logo-placeholder {
+        height: 30px;
+        margin-bottom: var(--space-sm);
+        color: var(--text-secondary);
+        font-style: italic;
+    }
+
+    h3 {
+        font-family: var(--font-secondary);
+        font-size: 1.25rem;
+        color: var(--text-primary);
+        margin-bottom: var(--space-xs);
+    }
+
+    .metrics {
+        color: var(--text-secondary);
+        font-size: 0.9rem;
+    }
+}

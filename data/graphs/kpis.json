@@ -1,0 +1,28 @@
+{
+  "kpis": [
+    {
+      "title": "New Sign-ups",
+      "value": "1,234",
+      "trend": "+12%",
+      "sparkline": [50, 55, 60, 58, 62, 65, 70, 72, 75, 80, 78, 85]
+    },
+    {
+      "title": "Customer Churn Rate",
+      "value": "3.4%",
+      "trend": "-0.5%",
+      "sparkline": [4.5, 4.2, 4.3, 4.0, 3.8, 3.9, 3.5, 3.6, 3.4, 3.2, 3.3, 3.4]
+    },
+    {
+      "title": "Avg. Session Duration",
+      "value": "4m 15s",
+      "trend": "+22s",
+      "sparkline": [180, 190, 195, 200, 210, 205, 220, 230, 240, 250, 245, 255]
+    },
+    {
+      "title": "Conversion Rate",
+      "value": "2.1%",
+      "trend": "+0.2%",
+      "sparkline": [1.5, 1.6, 1.5, 1.7, 1.8, 1.9, 2.0, 1.9, 2.1, 2.2, 2.1, 2.1]
+    }
+  ]
+}

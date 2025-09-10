@@ -1,0 +1,82 @@
+/* Base styles for the entire site */
+
+html {
+  scroll-behavior: smooth;
+  scroll-padding-top: 80px; /* Adjust based on final header height */
+  font-size: 16px; /* Base font size */
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  background-color: var(--bg-900);
+  color: var(--text-primary);
+  font-family: var(--font-primary);
+  line-height: 1.6;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+/* Base container */
+.container {
+    width: 100%;
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 1.5rem; /* 24px */
+}
+
+/* Reusable section titles */
+.section-title {
+  text-align: center;
+  font-family: var(--font-secondary);
+  font-size: 2.5rem;
+  color: var(--text-primary);
+  margin-bottom: var(--space-sm);
+}
+
+.section-intro {
+  text-align: center;
+  max-width: var(--line-length);
+  margin: 0 auto var(--space-xl);
+  color: var(--text-secondary);
+  font-size: 1.125rem;
+}
+
+/* Reusable button styles */
+.btn {
+  display: inline-block;
+  padding: var(--space-sm) var(--space-lg);
+  border-radius: var(--border-radius);
+  text-decoration: none;
+  font-weight: 700;
+  font-family: var(--font-secondary);
+  cursor: pointer;
+  border: 2px solid transparent;
+  transition: all 0.3s ease;
+}
+
+.btn-primary {
+  background-color: var(--brand-red);
+  color: var(--brand-white);
+
+  &:hover {
+    background-color: transparent;
+    border-color: var(--brand-red);
+    color: var(--brand-red);
+  }
+}
+
+.btn-secondary {
+    background-color: transparent;
+    border-color: var(--accent-cyan);
+    color: var(--accent-cyan);
+
+    &:hover {
+        background-color: var(--accent-cyan);
+        color: var(--bg-900);
+    }
+}

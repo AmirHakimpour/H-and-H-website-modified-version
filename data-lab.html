@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Data Lab - H&H Business Insights</title>
+
+    <meta name="description" content="Explore interactive data visualizations and key performance indicators in the H&H Business Insights Data Lab.">
+    <link rel="canonical" href="https://hnhbi.com/data-lab.html">
+
+    <!-- Stylesheets -->
+    <link rel="stylesheet" href="assets/css/design-tokens.css">
+    <link rel="stylesheet" href="assets/css/style.css">
+
+    <!-- Preload Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;700&family=Sora:wght@400;700&display=swap" rel="stylesheet">
+</head>
+<body class="dark-mode">
+
+    <header class="site-header" id="main-header">
+        <!-- Header will be injected by JS -->
+    </header>
+
+    <main>
+        <section class="page-header">
+            <div class="container">
+                <h1>Data Lab</h1>
+                <p>Interactive charts and key metrics. See how we track success.</p>
+            </div>
+        </section>
+
+        <section class="container data-lab-content">
+            <div class="kpi-grid" id="kpi-grid">
+                <!-- KPI tiles will be injected here -->
+            </div>
+
+            <div class="chart-container" id="timeseries-chart-container">
+                <h2>Monthly Active Users</h2>
+                <canvas id="timeseries-chart"></canvas>
+                <div class="chart-actions">
+                    <button data-chart-id="timeseries-chart" class="export-png">Export PNG</button>
+                    <button data-chart-id="timeseries-chart" class="export-csv">Export CSV</button>
+                </div>
+                <div class="accessible-table" id="timeseries-table"></div>
+            </div>
+
+            <div class="chart-container" id="bar-chart-container">
+                <h2>Monthly Revenue by Plan</h2>
+                <canvas id="bar-chart"></canvas>
+                 <div class="chart-actions">
+                    <button data-chart-id="bar-chart" class="export-png">Export PNG</button>
+                    <button data-chart-id="bar-chart" class="export-csv">Export CSV</button>
+                </div>
+                <div class="accessible-table" id="bar-table"></div>
+            </div>
+
+            <div class="chart-container" id="funnel-chart-container">
+                <h2>Sales Conversion Funnel</h2>
+                <canvas id="funnel-chart"></canvas>
+                 <div class="chart-actions">
+                    <button data-chart-id="funnel-chart" class="export-png">Export PNG</button>
+                    <button data-chart-id="funnel-chart" class="export-csv">Export CSV</button>
+                </div>
+                <div class="accessible-table" id="funnel-table"></div>
+            </div>
+        </section>
+    </main>
+
+    <footer class="site-footer" id="main-footer">
+        <!-- Footer will be injected by JS -->
+    </footer>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.5.0/chart.umd.min.js"></script>
+    <script src="assets/js/modules/layout.js"></script>
+    <script src="assets/js/data-lab.js"></script>
+</body>
+</html>

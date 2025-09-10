@@ -1,0 +1,91 @@
+.game-container {
+    padding-top: var(--space-xl);
+    padding-bottom: var(--space-xl);
+}
+
+.game-ui {
+    display: flex;
+    justify-content: space-around;
+    background-color: var(--bg-800);
+    padding: var(--space-md);
+    border-radius: var(--border-radius);
+    margin-bottom: var(--space-xl);
+    border: 1px solid var(--glass);
+}
+
+.game-stat {
+    text-align: center;
+    color: var(--text-secondary);
+    font-size: 1rem;
+
+    span:first-child {
+        display: block;
+        font-size: 0.875rem;
+        text-transform: uppercase;
+        letter-spacing: 0.5px;
+    }
+
+    span:last-child {
+        font-size: 2rem;
+        font-weight: 700;
+        color: var(--text-primary);
+    }
+}
+
+.game-board {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: var(--space-xl);
+}
+
+.kpi-cards-container, .strategy-tiles-container {
+    display: grid;
+    gap: var(--space-md);
+}
+
+.game-card, .game-tile {
+    padding: var(--space-lg);
+    border-radius: var(--border-radius);
+    background-color: var(--bg-800);
+    border: 1px solid var(--glass);
+    cursor: pointer;
+    transition: all 0.2s ease;
+    text-align: center;
+    min-height: 80px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.kpi-card:hover, .strategy-tile:hover {
+    transform: translateY(-4px);
+    background-color: var(--glass);
+}
+
+.kpi-card.selected {
+    background-color: var(--accent-cyan);
+    color: var(--bg-900);
+    border-color: var(--accent-cyan);
+}
+
+.strategy-tile.matched, .kpi-card.matched {
+    background-color: var(--accent-gold);
+    color: var(--bg-900);
+    border-color: var(--accent-gold);
+    cursor: not-allowed;
+    opacity: 0.6;
+}
+
+.strategy-tile.incorrect {
+    background-color: var(--brand-red);
+    color: var(--brand-white);
+    transform: translateX(5px);
+}
+
+.game-result {
+    text-align: center;
+    padding: var(--space-xxl);
+    background-color: var(--bg-800);
+    border-radius: var(--border-radius);
+    margin-top: var(--space-xl);
+}

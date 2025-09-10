@@ -1,4 +1,5 @@
+# https://www.robotstxt.org/robotstxt.html
 User-agent: *
-Disallow: /assets/
+Disallow:
 
 Sitemap: https://hnhbi.com/sitemap.xml

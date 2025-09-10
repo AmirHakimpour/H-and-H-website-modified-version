@@ -1,0 +1,10 @@
+{
+  "title": "Sales Conversion Funnel",
+  "data": [
+    { "stage": "Website Visits", "value": 15000 },
+    { "stage": "Product Views", "value": 9800 },
+    { "stage": "Add to Cart", "value": 4500 },
+    { "stage": "Checkout", "value": 2100 },
+    { "stage": "Purchase", "value": 1500 }
+  ]
+}

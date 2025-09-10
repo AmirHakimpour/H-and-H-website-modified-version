@@ -1,133 +1,66 @@
-const header = document.querySelector('.site-header');
-const nav = document.querySelector('[data-nav]');
-const toggler = document.querySelector('[data-nav-toggler]');
+/**
+ * Main application script for the H&H Business Insights homepage.
+ */
+// Modules are loaded via <script> tags in the HTML now.
 
-// scroll listener: toggle white bg
-window.addEventListener('scroll', () => {
-  if (window.scrollY > 50) {
-    header.classList.add('scrolled');
-  } else {
-    header.classList.remove('scrolled');
-  }
-});
+/**
+ * Populates the hero section with data from the config file.
+ * @param {object} heroData - The hero data object from site-config.json.
+ */
+function populateHero(heroData) {
+    document.querySelector('[data-content="hero-headline"]').textContent = heroData.headline;
+    document.querySelector('[data-content="hero-subhead"]').textContent = heroData.subhead;
 
-// mobile menu toggle
-toggler.addEventListener('click', () => {
-  nav.classList.toggle('active');
-  toggler.classList.toggle('open');
-  // reflect expanded state
-  const isOpen = nav.classList.contains('active');
-  toggler.setAttribute('aria-expanded', isOpen);
-});
+    const primaryCta = document.querySelector('[data-content="hero-primaryCta"]');
+    primaryCta.textContent = heroData.primaryCta.text;
+    primaryCta.href = heroData.primaryCta.url;
 
-// close mobile menu when any link is clicked
-document.querySelectorAll('.nav-list a').forEach(link => {
-  link.addEventListener('click', () => {
-    if (nav.classList.contains('active')) {
-      nav.classList.remove('active');
-      toggler.classList.remove('open');
+    const secondaryCta = document.querySelector('[data-content="hero-secondaryCta"]');
+    secondaryCta.textContent = heroData.secondaryCta.text;
+    secondaryCta.href = heroData.secondaryCta.url;
+}
+
+/**
+ * Initializes the application.
+ * Fetches site data and populates the page.
+ */
+async function initHomepage() {
+  populateHeader();
+  initBaseEventListeners();
+
+  try {
+    const [siteConfigRes, caseStudiesRes] = await Promise.all([
+        fetch('/data/site-config.json'),
+        fetch('/data/case-studies.json')
+    ]);
+
+    if (!siteConfigRes.ok) throw new Error(`Failed to load site-config.json: ${siteConfigRes.status}`);
+    if (!caseStudiesRes.ok) throw new Error(`Failed to load case-studies.json: ${caseStudiesRes.status}`);
+
+    const siteConfig = await siteConfigRes.json();
+    const caseStudiesData = await caseStudiesRes.json();
+
+    // Populate sections
+    if (siteConfig.homepage && siteConfig.homepage.hero) {
+        populateHero(siteConfig.homepage.hero);
     }
-  });
-});
-
-// feature card logics
-document.addEventListener('DOMContentLoaded', () => {
-  document.querySelectorAll('.feature-card').forEach(card => {
-    const readMore = card.querySelector('.feature-card__readmore');
-    const closeBtn = card.querySelector('.feature-card__close');
-
-    readMore.addEventListener('click', () => {
-      card.classList.add('expanded');
-    });
-
-    closeBtn.addEventListener('click', () => {
-      card.classList.remove('expanded');
-    });
-  });
-});
-
-//booking form
-(function () {
-  // Initialize EmailJS with your Public Key (Account → General)
-  emailjs.init('U1Ivr5jUgrrQjxibM');
-})();
-
-// Your EmailJS identifiers
-const SERVICE_ID = 'service_6xd2q1g';
-const BOOKING_TEMPLATE = 'template_etf97vp';  // internal notification
-const AUTO_REPLY_TEMPLATE = 'template_hj0k37e';  // your Auto-Reply template
-const USER_ID = 'U1Ivr5jUgrrQjxibM';
-
-document
-  .getElementById('booking-form')
-  .addEventListener('submit', function (e) {
-
-    //  Honeypot check – abort if the hidden field has a value
-    if (this['bot-field'].value) {
-      console.warn('Spam bot caught – submission aborted.');
-      return;
+    if (siteConfig.services) {
+        populateServices(siteConfig.services);
+    }
+    if (siteConfig.homepage && siteConfig.homepage.whyChooseUs) {
+        populateWhyChooseUs(siteConfig.homepage.whyChooseUs);
+    }
+    if (siteConfig.site) {
+        populateFooter(siteConfig.site);
+    }
+    if (caseStudiesData.caseStudies) {
+        populateCaseStudies(caseStudiesData.caseStudies);
     }
 
-    //prevent the normal submit
-    e.preventDefault();
-
-    //Send the booking notification to your inbox
-    emailjs.sendForm(
-      SERVICE_ID,
-      BOOKING_TEMPLATE,
-      this,      // the <form> element
-      USER_ID
-    )
-      .then(() => {
-        // After that succeeds, send the auto-reply back to the user
-        //    Grab the form values via their `name="..."` attributes:
-        const name = this.from_name.value;
-        const title = this.service_type.value;
-        const reply_to = this.reply_to.value;
-
-        return emailjs.send(
-          SERVICE_ID,
-          AUTO_REPLY_TEMPLATE,
-          {
-            name,        
-            title,        
-            reply_to,    
-          },
-          USER_ID
-        );
-      })
-      .then(() => {
-        alert('Booking request sent! A confirmation email is on its way.');
-        this.reset();
-      })
-      .catch(err => {
-        console.error('EmailJS error', err);
-        alert('Sorry, something went wrong. Please try again later.');
-      });
-  });
-
-// Modal open/close handlers
-const tosModal = document.getElementById('tos-modal');
-const openBtns = document.querySelectorAll('[data-modal-open]');
-const closeBtns = document.querySelectorAll('[data-modal-close], .modal-close');
-
-// open
-openBtns.forEach(btn =>
-  btn.addEventListener('click', () => tosModal.classList.add('active'))
-);
-
-// close (overlay & “×”)
-closeBtns.forEach(el =>
-  el.addEventListener('click', () => tosModal.classList.remove('active'))
-);
-
-// also close on Escape key
-document.addEventListener('keyup', e => {
-  if (e.key === 'Escape' && tosModal.classList.contains('active')) {
-    tosModal.classList.remove('active');
+  } catch (error) {
+    console.error("Failed to load site configuration:", error);
   }
-});
+}
 
-
-
-
+// --- App Initialization ---
+document.addEventListener('DOMContentLoaded', initHomepage);
